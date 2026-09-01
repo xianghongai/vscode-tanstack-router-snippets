@@ -1,6 +1,9 @@
 {
   "TanStack Router import": {
-    "prefix": "routerImport",
+    "prefix": [
+      "routerImport",
+      "ri"
+    ],
     "body": [
       "import { ${1:useNavigate} } from '@tanstack/react-router';",
       "$0"

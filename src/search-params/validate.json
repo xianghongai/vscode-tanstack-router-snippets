@@ -1,6 +1,9 @@
 {
   "TanStack Router validateSearch with Zod": {
-    "prefix": "validateSearch",
+    "prefix": [
+      "validateSearch",
+      "rvs"
+    ],
     "body": [
       "const ${1:productSearchSchema} = z.object({",
       "  page: z.number().catch(${2:1}),",
@@ -17,7 +20,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router validateSearch by hand (TypeScript)": {
-    "prefix": "validateSearch",
+    "prefix": [
+      "validateSearch",
+      "rvs"
+    ],
     "body": [
       "type ${1:ProductSearch} = {",
       "  page: number;",
@@ -36,7 +42,10 @@
     "scope": "typescript,typescriptreact"
   },
   "TanStack Router search middleware": {
-    "prefix": "searchMiddleware",
+    "prefix": [
+      "searchMiddleware",
+      "rsm"
+    ],
     "body": [
       "export const Route = createFileRoute('${1:/shop/products}')({",
       "  validateSearch: ${2:productSearchSchema},",

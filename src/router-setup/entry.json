@@ -1,6 +1,9 @@
 {
   "TanStack Router application entry (TypeScript)": {
-    "prefix": "routerEntry",
+    "prefix": [
+      "routerEntry",
+      "re"
+    ],
     "isFileTemplate": true,
     "body": [
       "import { RouterProvider, createRouter } from '@tanstack/react-router';",
@@ -33,7 +36,10 @@
     "scope": "typescriptreact"
   },
   "TanStack Router application entry (JavaScript)": {
-    "prefix": "routerEntry",
+    "prefix": [
+      "routerEntry",
+      "re"
+    ],
     "isFileTemplate": true,
     "body": [
       "import { RouterProvider, createRouter } from '@tanstack/react-router';",

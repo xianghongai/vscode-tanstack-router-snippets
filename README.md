@@ -1,6 +1,6 @@
 # TanStack Router Snippets (Visual Studio Code)
 
-Everyday TanStack Router code patterns for VS Code: file routes, navigation, search params, path params, loaders, router context, boundaries, TanStack Query integration and TanStack Start.
+Everyday TanStack Router patterns for VS Code: file routes, navigation, search params, loaders, router context, boundaries, TanStack Query integration and TanStack Start.
 
 <p>
   <a href="https://github.com/xianghongai/vscode-tanstack-router-snippets">
@@ -22,57 +22,150 @@ Everyday TanStack Router code patterns for VS Code: file routes, navigation, sea
 
 [中文文档](./README_CN.md)
 
-## Design
+## Prefixes
 
-**One capability per snippet, one scope per language.** All snippets ship in a single `.code-snippets` file. Which languages a snippet reaches is decided by its own `scope` field, not by the file it lives in. A body carrying type annotations or generics is offered only in TypeScript language modes, and a body carrying JSX never appears in plain JavaScript or TypeScript.
+Prefixes follow three patterns:
 
-**TypeScript is the main line.** Inference is what TanStack Router is for — route paths, params, search fields and loader data are all typed from the route tree — so most snippets are written the way a TypeScript project writes them, and only the entry file has a separate JavaScript twin.
+1. **The API name is the prefix** — `createFileRoute`, `useLoaderData`, `Link`. A router API's name _is_ the code you are about to write, so there is no mapping to memorize first.
+2. **Frequent APIs also answer to a short alias** — `r` plus the API's initials (`rl` = `Link`, `ruld` = `useLoaderData`); a name already starting with route or router drops that `r` (`rc` = `routeContext`). Both forms sit on the same snippet, so the alias is a speed-up once you know it, never the way in.
+3. **A family shares a stem, variants extend it** — `Link` / `LinkParams` / `LinkSearch`, `fileRoute…`, `codeRoute…`, `start…`. Type the stem and the completion list lays the whole family out; nothing has to be recalled from memory.
 
-**Sources are split by module.** Each capability owns a directory under `src/`, and `src/recipes/` owns the cross-module examples. The build merges them in sorted order into the single contributed file. A snippet is identified by its name, so a repeated name fails the build — the later definition would otherwise silently replace the earlier one.
+### Router setup
 
-**Prefixes are the discovery path, and they may repeat.** A snippet that wraps one API uses that API's real name (`createFileRoute`, `useNavigate`, `useSearch`, `Link`, `notFound`, `createServerFn`); a scenario uses a module stem (`routerEntry`, `fileRouteLayout`, `loaderDeps`, `searchMiddleware`, `routeGuard`). Because VS Code triggers on prefix but identifies a snippet by name, several snippets may share a prefix and are offered side by side, labelled by name — that is how `useSearch` offers both the in-route `Route.useSearch()` form and the `useSearch({ from })` form for components elsewhere.
+| Prefix                   | Alias   | Inserts                                                   |
+| ------------------------ | ------- | --------------------------------------------------------- |
+| `routerEntry`            | `re`    | Application entry — create, register and mount the router |
+| `createRouter`           | `rcr`   | Router instance from the generated route tree             |
+| `routerRegister`         | `rrr`   | `declare module` type registration                        |
+| `RouterProvider`         | `rp`    | The component that renders the router                     |
+| `routerVitePlugin`       |         | Route generator in a Vite config                          |
+| `TanStackRouterDevtools` | `rtsrd` | Devtools inside the root route component                  |
+| `routerImport`           | `ri`    | Import an API, `routerTypeImport` for a type              |
 
-**File-based routing is the main path; code-based routing ships too.** Most snippets assume the route generator and a `routeTree.gen` file. `src/code-routes/` covers the projects that assemble a tree by hand with `createRoute` and `addChildren`, under `codeRootRoute`, `createRoute`, `codeRouteTree` and `codeRouteLazy`.
+### Routes
 
-**Imports are separate from fragments.** A fragment inserts only the code it is about and names its required imports in its description; a complete file template carries its own imports. Editable placeholders cover what you actually rename — route path, component, param, loader function, query options — while illustrative field names stay literal so the Tab sequence stays short. Repeated identifiers are mirrors and update together.
+| Prefix                   | Alias   | Inserts                                                      |
+| ------------------------ | ------- | ------------------------------------------------------------ |
+| `createFileRoute`        | `rcfr`  | File route and its component                                 |
+| `routeModule`            | `rm`    | Full route module — loader, component, error, pending        |
+| `fileRouteParam`         | `rfrp`  | Dynamic segment, loaded and read by it                       |
+| `fileRouteOptionalParam` |         | Optional leading segment                                     |
+| `fileRouteSplat`         |         | Splat route reading `_splat`                                 |
+| `fileRouteLayout`        | `rfrl`  | Layout route with an `Outlet`                                |
+| `fileRoutePathless`      |         | Pathless layout that adds no URL segment                     |
+| `createLazyFileRoute`    | `rclfr` | Component split into a `.lazy` file                          |
+| `createRootRoute`        | `rcrr`  | Root route, `createRootRouteWithContext` for a typed context |
+| `rootDocument`           |         | Root route owning the HTML document                          |
 
-**Responsibilities stay separate.** The router owns the URL, its params and its search; TanStack Query owns server state. The `src/query/` snippets are only the seam between them — filling the query cache from a loader, putting a `queryClient` on the router context, wiring SSR dehydration. Snippets for TanStack Query's own API live in [React Ecosystem Snippets](https://github.com/xianghongai/vscode-react-ecosystem-snippets), and React Router v7 lives in [React Router Snippets](https://github.com/xianghongai/vscode-react-router-snippets).
+### Code-based routes
 
-**No runtime.** The extension contributes snippets and nothing else — no extension-host code, no activation events, no dependency installation, no project detection, no telemetry. Snippets are offered by language mode, never gated on which libraries your project happens to have installed.
+| Prefix          | Alias | Inserts                             |
+| --------------- | ----- | ----------------------------------- |
+| `codeRootRoute` |       | Root of a hand-assembled tree       |
+| `createRoute`   |       | Route attached to its parent        |
+| `codeRouteTree` |       | Tree assembled with `addChildren`   |
+| `codeRouteLazy` |       | Code-based route split with `.lazy` |
 
-## Usage
+### Navigation
 
-Install the VSIX through **Extensions → Install from VSIX…**, then open a file in a JavaScript, JavaScript React, TypeScript or TypeScript React language mode.
+| Prefix           | Alias  | Inserts                                                  |
+| ---------------- | ------ | -------------------------------------------------------- |
+| `Link`           | `rl`   | Link to a route                                          |
+| `LinkParams`     | `rlp`  | Link to a dynamic segment                                |
+| `LinkSearch`     |        | Link carrying search params                              |
+| `LinkActive`     | `rla`  | Link that styles itself while active                     |
+| `LinkPreload`    |        | Per-link preloading override                             |
+| `linkOptions`    |        | Link options declared outside JSX                        |
+| `useNavigate`    | `run`  | Programmatic navigation, `navigateParams` with a segment |
+| `Navigate`       | `rn`   | Navigate on render                                       |
+| `redirect`       | `rr`   | Thrown redirect carrying the current href                |
+| `useBlocker`     | `rub`  | Block navigation and resolve it yourself                 |
+| `useRouterState` | `rurs` | Router state read through a selector                     |
+| `useCanGoBack`   |        | Back, with a fallback route                              |
 
-Type an API name or a module stem and pick from the completion list, or use **Insert Snippet** to browse. Press **Tab** to move through the editing points; the final cursor lands where you continue writing. Enable `editor.tabCompletion` in your settings if you prefer expanding a prefix directly with Tab.
+### Search params
 
-Complete file templates — the application entry, a route module, the root document, and the recipes — are also reachable through **Snippets: Fill File with Snippet**.
+| Prefix             | Alias | Inserts                                                         |
+| ------------------ | ----- | --------------------------------------------------------------- |
+| `validateSearch`   | `rvs` | Search schema — a Zod version and a plain-function version      |
+| `searchMiddleware` | `rsm` | `retainSearchParams` and `stripSearchParams`                    |
+| `useSearch`        | `rus` | In-route `Route.useSearch()` and external `useSearch({ from })` |
+| `useSearchSelect`  |       | Subscribe to one search field                                   |
+| `searchUpdater`    |       | `Link` that updates one param and keeps the rest                |
+| `navigateSearch`   |       | The same update, programmatically                               |
 
-Three conventions are worth knowing:
+### Path params
 
-- **Route paths are placeholders, and the generator owns them.** A snippet inserts a path such as `/posts/$postId` as editable text. In a file-based project the route generator rewrites that argument to match the file's location, so the file name is what actually decides the route.
-- **Reading route state has two forms.** Inside a route module, use the `Route` it exports: `Route.useSearch()`, `Route.useParams()`, `Route.useLoaderData()`. From a component elsewhere, either pass `from` to the standalone hook or bind once with `getRouteApi`. Both forms ship, under the same prefixes.
-- **`./service` is the integration boundary.** File recipes import their request functions and query options from a relative `./service` module. Create it with your own request layer, or edit the path and the exported name — both are editable placeholders. No HTTP client, API host, path alias or UI library is prescribed.
+| Prefix        | Alias  | Inserts                                                         |
+| ------------- | ------ | --------------------------------------------------------------- |
+| `useParams`   | `rup`  | In-route `Route.useParams()` and external `useParams({ from })` |
+| `getRouteApi` | `rgra` | Outside component bound once to a route                         |
+| `routeParams` |        | `parse` and `stringify` for a param                             |
 
-## Modules
+### Data loading
 
-The extension carries no runtime dependency on these packages; install in your application only the ones you use. Versions below are the tested major-version families, not a claim about every historical minor release.
+| Prefix             | Alias  | Inserts                                     |
+| ------------------ | ------ | ------------------------------------------- |
+| `routeLoader`      | `rrl`  | Loader with an abort signal                 |
+| `loaderDeps`       | `rld`  | Loader keyed on search params               |
+| `loaderStaleTime`  |        | `staleTime`, `gcTime`, `shouldReload`       |
+| `beforeLoad`       | `rbl`  | Hook running before the loader and children |
+| `useLoaderData`    | `ruld` | Loader result, `useLoaderDeps` for its key  |
+| `loaderDeferred`   |        | Await the first paint, defer the rest       |
+| `Await`            |        | Render a deferred promise under `Suspense`  |
+| `routerInvalidate` |        | Re-run every matched loader                 |
 
-| Module            | Install                                                           |
-| ----------------- | ----------------------------------------------------------------- |
-| Router            | `@tanstack/react-router@1`                                        |
-| Route generation  | `@tanstack/router-plugin@1`, for Vite, Rspack, webpack or esbuild |
-| Devtools          | `@tanstack/react-router-devtools@1`                               |
-| Search validation | `zod@4`, or any other Standard Schema validator                   |
-| Server state      | `@tanstack/react-query@5`                                         |
-| Server rendering  | `@tanstack/react-router-ssr-query@1`, with TanStack Query         |
-| Full-stack        | `@tanstack/react-start@1`                                         |
+### Router context
 
-React 19 is the tested target. TypeScript projects also need the matching React type packages.
+| Prefix                 | Alias  | Inserts                                          |
+| ---------------------- | ------ | ------------------------------------------------ |
+| `routeContext`         | `rc`   | Value added to the context in `beforeLoad`       |
+| `useRouteContext`      | `rurc` | One value read out of the context                |
+| `routerRuntimeContext` |        | Context declared at creation, supplied at render |
 
-`validateSearch` accepts any Standard Schema validator directly, so Zod is one option rather than a requirement — a plain validating function is covered too. The `src/start/` snippets assume a TanStack Start build; the rest of the extension does not.
+### Boundaries
 
-When building from source, you can set `SNIPPETS_EXCLUDE` to exclude whole directories from the source. For instance, `SNIPPETS_EXCLUDE=src/start/**,src/code-routes/**` bundles a file-based, client-only subset. Put it in a gitignored `.env` so the choice stays out of the source tree; a value passed on the command line wins over the file.
+| Prefix              | Alias  | Inserts                                           |
+| ------------------- | ------ | ------------------------------------------------- |
+| `errorComponent`    | `rec`  | Error state with a `reset` button                 |
+| `pendingComponent`  | `rpc`  | Pending state with `pendingMs` and `pendingMinMs` |
+| `notFoundComponent` | `rnfc` | Not-found state of one route                      |
+| `notFound`          | `rnf`  | `throw notFound()` from a loader                  |
+| `routeBoundaries`   |        | All three attached as route options               |
+
+### TanStack Query
+
+| Prefix               | Alias  | Inserts                                          |
+| -------------------- | ------ | ------------------------------------------------ |
+| `ensureQueryData`    | `reqd` | Loader filling the query cache                   |
+| `queryPrefetch`      |        | Slow query started, fast one awaited             |
+| `queryRoute`         | `rqr`  | Loader plus `useSuspenseQuery` on the same query |
+| `queryClientContext` |        | `queryClient` typed onto the router context      |
+| `routerSsrQuery`     |        | Per-request router and query client, SSR wired   |
+
+### TanStack Start
+
+| Prefix               | Alias  | Inserts                                                                |
+| -------------------- | ------ | ---------------------------------------------------------------------- |
+| `createServerFn`     | `rcsf` | Server function                                                        |
+| `serverFnValidator`  | `rsfv` | Server function with a validator                                       |
+| `createServerOnlyFn` |        | Helper kept out of the client bundle                                   |
+| `createIsomorphicFn` |        | Server and client implementations of one function                      |
+| `useServerFn`        | `rusf` | Call a server function from a component                                |
+| `createMiddleware`   |        | Middleware shared across server functions                              |
+| `startServerRoute`   | `rssr` | HTTP handlers in a route file, `startServerRouteParams` with a segment |
+| `createServerEntry`  |        | Server entry wrapping the default handler                              |
+| `startImport`        |        | Import a TanStack Start API                                            |
+
+### Recipes
+
+| Prefix                  | Alias | Inserts                                                 |
+| ----------------------- | ----- | ------------------------------------------------------- |
+| `routeGuard`            | `rg`  | Authenticated pathless layout redirecting with the href |
+| `routeLoginRedirect`    |       | Login route returning the visitor to that href          |
+| `routePagination`       | `rrp` | Page number in the URL, through `loaderDeps` to a query |
+| `routeFormSubmit`       | `rfs` | Server-validated submission, redirect and invalidate    |
+| `routePendingIndicator` |       | One indicator for any in-flight navigation              |
 
 ## References
 

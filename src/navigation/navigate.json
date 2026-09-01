@@ -1,6 +1,9 @@
 {
   "TanStack Router useNavigate": {
-    "prefix": "useNavigate",
+    "prefix": [
+      "useNavigate",
+      "run"
+    ],
     "body": [
       "const navigate = useNavigate();",
       "",
@@ -29,7 +32,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router Navigate": {
-    "prefix": "Navigate",
+    "prefix": [
+      "Navigate",
+      "rn"
+    ],
     "body": [
       "<Navigate to=\"${1:/login}\" replace />",
       "$0"
@@ -38,7 +44,10 @@
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router redirect": {
-    "prefix": "redirect",
+    "prefix": [
+      "redirect",
+      "rr"
+    ],
     "body": [
       "throw redirect({",
       "  to: '${1:/login}',",
@@ -50,7 +59,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useBlocker": {
-    "prefix": "useBlocker",
+    "prefix": [
+      "useBlocker",
+      "rub"
+    ],
     "body": [
       "const { status, proceed, reset } = useBlocker({",
       "  shouldBlockFn: () => ${1:isDirty},",
@@ -62,7 +74,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useRouterState pending": {
-    "prefix": "useRouterState",
+    "prefix": [
+      "useRouterState",
+      "rurs"
+    ],
     "body": [
       "const ${1:isNavigating} = useRouterState({",
       "  select: (state) => state.status === 'pending',",

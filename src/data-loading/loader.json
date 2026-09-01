@@ -1,6 +1,9 @@
 {
   "TanStack Router route loader": {
-    "prefix": "routeLoader",
+    "prefix": [
+      "routeLoader",
+      "rrl"
+    ],
     "body": [
       "loader: async ({ params, abortController }) => {",
       "  return ${1:fetchPost}(params.${2:postId}, { signal: abortController.signal });",
@@ -11,7 +14,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router loaderDeps": {
-    "prefix": "loaderDeps",
+    "prefix": [
+      "loaderDeps",
+      "rld"
+    ],
     "body": [
       "loaderDeps: ({ search }) => ({ ${1:page}: search.${1} }),",
       "loader: ({ deps }) => ${2:fetchPosts}(deps.${1}),",
@@ -32,7 +38,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router beforeLoad": {
-    "prefix": "beforeLoad",
+    "prefix": [
+      "beforeLoad",
+      "rbl"
+    ],
     "body": [
       "beforeLoad: async ({ context, location }) => {",
       "  $0",
@@ -42,7 +51,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useLoaderData": {
-    "prefix": "useLoaderData",
+    "prefix": [
+      "useLoaderData",
+      "ruld"
+    ],
     "body": [
       "const ${1:post} = Route.useLoaderData();",
       "$0"

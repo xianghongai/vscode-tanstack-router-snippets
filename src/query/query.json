@@ -1,6 +1,9 @@
 {
   "TanStack Router loader ensureQueryData": {
-    "prefix": "ensureQueryData",
+    "prefix": [
+      "ensureQueryData",
+      "reqd"
+    ],
     "body": [
       "loader: ({ context }) => context.queryClient.ensureQueryData(${1:postsQueryOptions}),",
       "$0"
@@ -21,7 +24,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router route with suspense query": {
-    "prefix": "queryRoute",
+    "prefix": [
+      "queryRoute",
+      "rqr"
+    ],
     "body": [
       "export const Route = createFileRoute('${1:/posts}')({",
       "  loader: ({ context }) => context.queryClient.ensureQueryData(${2:postsQueryOptions}),",

@@ -1,6 +1,9 @@
 {
   "TanStack Router useParams from route": {
-    "prefix": "useParams",
+    "prefix": [
+      "useParams",
+      "rup"
+    ],
     "body": [
       "const { ${1:postId} } = Route.useParams();",
       "$0"
@@ -9,7 +12,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useParams by route id": {
-    "prefix": "useParams",
+    "prefix": [
+      "useParams",
+      "rup"
+    ],
     "body": [
       "const { ${1:postId} } = useParams({ from: '${2:/posts}/\\$${1}' });",
       "$0"
@@ -18,7 +24,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router getRouteApi": {
-    "prefix": "getRouteApi",
+    "prefix": [
+      "getRouteApi",
+      "rgra"
+    ],
     "body": [
       "const ${1:postRoute} = getRouteApi('${2:/posts}/\\$${3:postId}');",
       "",

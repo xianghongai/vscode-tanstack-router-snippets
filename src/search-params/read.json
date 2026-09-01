@@ -1,6 +1,9 @@
 {
   "TanStack Router useSearch from route": {
-    "prefix": "useSearch",
+    "prefix": [
+      "useSearch",
+      "rus"
+    ],
     "body": [
       "const { ${1:page} } = Route.useSearch();",
       "$0"
@@ -9,7 +12,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useSearch by route id": {
-    "prefix": "useSearch",
+    "prefix": [
+      "useSearch",
+      "rus"
+    ],
     "body": [
       "const { ${1:page} } = useSearch({ from: '${2:/shop/products}' });",
       "$0"

@@ -2,7 +2,7 @@
   "name": "vscode-tanstack-router-snippets",
   "displayName": "TanStack Router Snippets",
   "description": "Snippets for TanStack Router: file routes, search params, loaders, router context, TanStack Start and Query integration. TanStack Router 高频片段。",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "NicholasHsiang",
   "license": "MIT",
   "type": "module",

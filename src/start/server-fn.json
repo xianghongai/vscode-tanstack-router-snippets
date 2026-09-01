@@ -1,6 +1,9 @@
 {
   "TanStack Start server function": {
-    "prefix": "createServerFn",
+    "prefix": [
+      "createServerFn",
+      "rcsf"
+    ],
     "body": [
       "export const ${1:fetchPosts} = createServerFn().handler(async () => {",
       "  $0",
@@ -10,7 +13,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Start server function with validator": {
-    "prefix": "serverFnValidator",
+    "prefix": [
+      "serverFnValidator",
+      "rsfv"
+    ],
     "body": [
       "export const ${1:updateUser} = createServerFn({ method: 'POST' })",
       "  .validator(${2:userSchema})",
@@ -42,7 +48,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Start useServerFn": {
-    "prefix": "useServerFn",
+    "prefix": [
+      "useServerFn",
+      "rusf"
+    ],
     "body": [
       "const ${1:updateUser} = useServerFn(${2:updateUserFn});",
       "$0"

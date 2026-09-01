@@ -1,6 +1,9 @@
 {
   "TanStack Router authenticated layout (TypeScript)": {
-    "prefix": "routeGuard",
+    "prefix": [
+      "routeGuard",
+      "rg"
+    ],
     "isFileTemplate": true,
     "body": [
       "import { Outlet, createFileRoute, redirect } from '@tanstack/react-router';",

@@ -1,6 +1,9 @@
 {
   "TanStack Router createRouter": {
-    "prefix": "createRouter",
+    "prefix": [
+      "createRouter",
+      "rcr"
+    ],
     "body": [
       "export const ${1:router} = createRouter({",
       "  routeTree,",
@@ -14,7 +17,10 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router type registration": {
-    "prefix": "routerRegister",
+    "prefix": [
+      "routerRegister",
+      "rrr"
+    ],
     "body": [
       "declare module '@tanstack/react-router' {",
       "  interface Register {",
@@ -27,7 +33,10 @@
     "scope": "typescript,typescriptreact"
   },
   "TanStack Router RouterProvider": {
-    "prefix": "RouterProvider",
+    "prefix": [
+      "RouterProvider",
+      "rp"
+    ],
     "body": [
       "export function ${1:App}() {",
       "  return <RouterProvider router={${2:router}} />;",
@@ -38,7 +47,10 @@
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router devtools": {
-    "prefix": "TanStackRouterDevtools",
+    "prefix": [
+      "TanStackRouterDevtools",
+      "rtsrd"
+    ],
     "body": [
       "<TanStackRouterDevtools position=\"${1:bottom-right}\" />",
       "$0"

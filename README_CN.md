@@ -1,6 +1,6 @@
 # TanStack Router Snippets (Visual Studio Code)
 
-VS Code 中的 TanStack Router 日常代码片段：文件式路由、导航、search 参数、路径参数、loader、router context、边界组件、TanStack Query 集成与 TanStack Start。
+VS Code 中的 TanStack Router 日常代码片段：文件式路由、导航、search 参数、loader、router context、边界组件、TanStack Query 集成与 TanStack Start。
 
 <p>
   <a href="https://github.com/xianghongai/vscode-tanstack-router-snippets">
@@ -22,57 +22,150 @@ VS Code 中的 TanStack Router 日常代码片段：文件式路由、导航、s
 
 [English](./README.md)
 
-## 设计
+## 前缀清单
 
-**一条片段一个能力，一个 scope 决定投放语言。** 所有片段合并在单个 `.code-snippets` 文件中。某条片段出现在哪些语言，由它自己的 `scope` 字段决定，与它落在哪个文件无关。带类型注解或泛型的片段只在 TypeScript 语言模式下出现；带 JSX 的片段不会串到纯 JavaScript 或 TypeScript 模式。
+前缀遵循三种模式：
 
-**TypeScript 是主线。** 类型推导正是 TanStack Router 的目的——路由路径、params、search 字段与 loader 数据都由路由树推出——因此绝大多数片段按 TypeScript 工程的写法编写，只有入口文件另配 JavaScript 版本。
+1. **API 名本身就是前缀** —— `createFileRoute`、`useLoaderData`、`Link`。路由 API 的名字**就是**最终要写下的代码，中间没有翻译环节，无需先记一套映射。
+2. **高频 API 另配短码** —— `r` + API 首字母（`rl` = `Link`、`ruld` = `useLoaderData`）；名字本身以 route 或 router 开头的不再补这个 `r`（`rc` = `routeContext`）。两种形式挂在同一条片段上，短码是用熟之后的提速手段，而不是上手门槛。
+3. **同族共用词干，变体在其后扩展** —— `Link` / `LinkParams` / `LinkSearch`，以及 `fileRoute…`、`codeRoute…`、`start…`。打出词干就能在补全列表里摊开整族备选，不必回忆该用哪个后缀。
 
-**片段源按模块拆分。** 每个能力域在 `src/` 下拥有一个目录，跨模块组合场景归 `src/recipes/`。构建按排序合并成唯一的贡献文件。片段以名称标识，因此名称重复会导致构建失败——否则后者会静默覆盖前者。
+### router 装配
 
-**前缀是主要发现入口，且允许重复。** 封装单个 API 的片段直接用该 API 的真名（`createFileRoute`、`useNavigate`、`useSearch`、`Link`、`notFound`、`createServerFn`）；场景类使用模块词干（`routerEntry`、`fileRouteLayout`、`loaderDeps`、`searchMiddleware`、`routeGuard`）。VS Code 靠前缀触发、靠名称识别片段，因此多条片段可以共用一个前缀，并列出现在候选中并以名称区分——`useSearch` 便同时提供路由内的 `Route.useSearch()` 与供外部组件使用的 `useSearch({ from })` 两种形态。
+| 前缀                     | 缩写    | 插入内容                            |
+| ------------------------ | ------- | ----------------------------------- |
+| `routerEntry`            | `re`    | 应用入口——创建、注册并挂载 router   |
+| `createRouter`           | `rcr`   | 由生成的路由树创建 router 实例      |
+| `routerRegister`         | `rrr`   | `declare module` 类型注册           |
+| `RouterProvider`         | `rp`    | 渲染 router 的组件                  |
+| `routerVitePlugin`       |         | Vite 配置中的路由生成器             |
+| `TanStackRouterDevtools` | `rtsrd` | 根路由组件内的开发者工具            |
+| `routerImport`           | `ri`    | 导入 API，类型用 `routerTypeImport` |
 
-**文件式路由是主路径，代码式路由同样提供。** 多数片段假定使用路由生成器与 `routeTree.gen`。`src/code-routes/` 面向手工用 `createRoute` 与 `addChildren` 组树的工程，前缀为 `codeRootRoute`、`createRoute`、`codeRouteTree`、`codeRouteLazy`。
+### 路由定义
 
-**导入与片段正文分离。** 碎片类片段只插入它本身相关的代码，所需导入写在描述里；完整文件模板自带 imports。可编辑占位符覆盖真正需要改名的部分——路由路径、组件、参数、loader 函数、query options——示例字段名保持字面量，以免 Tab 序列过长。重复出现的标识符是镜像，会联动更新。
+| 前缀                     | 缩写    | 插入内容                                               |
+| ------------------------ | ------- | ------------------------------------------------------ |
+| `createFileRoute`        | `rcfr`  | 文件式路由及其组件                                     |
+| `routeModule`            | `rm`    | 完整路由模块——loader、组件、错误与等待状态             |
+| `fileRouteParam`         | `rfrp`  | 动态段，并按其加载与读取                               |
+| `fileRouteOptionalParam` |         | 可缺省的前导段                                         |
+| `fileRouteSplat`         |         | splat 路由，读取 `_splat`                              |
+| `fileRouteLayout`        | `rfrl`  | 带 `Outlet` 的布局路由                                 |
+| `fileRoutePathless`      |         | 不产生 URL 段的分组布局                                |
+| `createLazyFileRoute`    | `rclfr` | 组件拆分到 `.lazy` 文件                                |
+| `createRootRoute`        | `rcrr`  | 根路由，类型化 context 用 `createRootRouteWithContext` |
+| `rootDocument`           |         | 负责整份 HTML 文档的根路由                             |
 
-**职责边界保持独立。** router 管 URL 及其 params 与 search，TanStack Query 管服务端状态。`src/query/` 只覆盖两者之间的接缝：在 loader 中填充查询缓存、把 `queryClient` 挂到 router context、装配 SSR 脱水。TanStack Query 自身 API 的片段在 [React Ecosystem Snippets](https://github.com/xianghongai/vscode-react-ecosystem-snippets)，React Router v7 在 [React Router Snippets](https://github.com/xianghongai/vscode-react-router-snippets)。
+### 代码式路由
 
-**没有运行时。** 该扩展只贡献片段：没有扩展宿主代码、没有激活事件、不安装依赖、不探测项目、不采集数据。片段按语言模式提供候选，不会因项目是否安装某个库而自动启停。
+| 前缀            | 缩写 | 插入内容                    |
+| --------------- | ---- | --------------------------- |
+| `codeRootRoute` |      | 手工组树的根路由            |
+| `createRoute`   |      | 挂到父路由上的路由          |
+| `codeRouteTree` |      | 用 `addChildren` 组装的树   |
+| `codeRouteLazy` |      | 以 `.lazy` 拆分的代码式路由 |
 
-## 使用
+### 导航
 
-通过 **Extensions → Install from VSIX…** 安装，然后在 JavaScript、JavaScript React、TypeScript 或 TypeScript React 语言模式下打开文件。
+| 前缀             | 缩写   | 插入内容                                |
+| ---------------- | ------ | --------------------------------------- |
+| `Link`           | `rl`   | 跳转到某个路由                          |
+| `LinkParams`     | `rlp`  | 跳转到带动态段的路由                    |
+| `LinkSearch`     |        | 携带 search 参数跳转                    |
+| `LinkActive`     | `rla`  | 激活时自带样式的 Link                   |
+| `LinkPreload`    |        | 单个链接的预加载策略覆盖                |
+| `linkOptions`    |        | 在 JSX 之外声明链接选项                 |
+| `useNavigate`    | `run`  | 编程式导航，带动态段用 `navigateParams` |
+| `Navigate`       | `rn`   | 渲染时导航                              |
+| `redirect`       | `rr`   | 抛出重定向，并携带当前 href             |
+| `useBlocker`     | `rub`  | 拦截导航并自行决定去留                  |
+| `useRouterState` | `rurs` | 通过 selector 读取 router 状态          |
+| `useCanGoBack`   |        | 后退，并给出兜底路由                    |
 
-输入 API 名或模块词干，从补全列表中选择，也可通过 **Insert Snippet** 浏览。按 **Tab** 在编辑点之间移动，最终光标停在继续书写的位置。若希望直接按前缀 Tab 展开，可在个人设置中开启 `editor.tabCompletion`。
+### search 参数
 
-完整文件模板——应用入口、路由模块、根文档与各组合场景——也可通过 **Snippets: Fill File with Snippet** 插入。
+| 前缀               | 缩写  | 插入内容                                                |
+| ------------------ | ----- | ------------------------------------------------------- |
+| `validateSearch`   | `rvs` | search schema——Zod 版与普通函数版                       |
+| `searchMiddleware` | `rsm` | `retainSearchParams` 与 `stripSearchParams`             |
+| `useSearch`        | `rus` | 路由内 `Route.useSearch()` 与外部 `useSearch({ from })` |
+| `useSearchSelect`  |       | 只订阅一个 search 字段                                  |
+| `searchUpdater`    |       | 更新单个参数并保留其余的 `Link`                         |
+| `navigateSearch`   |       | 同样的更新，以编程方式进行                              |
 
-有三处约定需要知晓：
+### 路径参数
 
-- **路由路径是占位符，真正决定它的是生成器。** 片段插入的 `/posts/$postId` 一类路径是可编辑文本；在文件式工程中，路由生成器会按文件位置改写该实参，因此文件名才是路由的实际来源。
-- **读取路由状态有两种形态。** 在路由模块内部使用它导出的 `Route`：`Route.useSearch()`、`Route.useParams()`、`Route.useLoaderData()`；在模块之外的组件中，或给独立 Hook 传 `from`，或用 `getRouteApi` 一次绑定。两种形态都已提供，共用同一批前缀。
-- **`./service` 是应用接入点。** 完整场景片段从相对路径 `./service` 导入请求函数与 query options。请用自身的请求层实现该模块，或直接修改路径与导出名——两者都是可编辑占位符。示例不约定 HTTP 客户端、API 域名、路径别名或 UI 组件库。
+| 前缀          | 缩写   | 插入内容                                                |
+| ------------- | ------ | ------------------------------------------------------- |
+| `useParams`   | `rup`  | 路由内 `Route.useParams()` 与外部 `useParams({ from })` |
+| `getRouteApi` | `rgra` | 一次绑定到某个路由的外部组件                            |
+| `routeParams` |        | 参数的 `parse` 与 `stringify`                           |
 
-## 模块
+### 数据加载
 
-扩展本身不依赖下列包，在应用中按需安装即可。版本为已验证的大版本组合，并不宣称覆盖全部历史小版本。
+| 前缀               | 缩写   | 插入内容                                |
+| ------------------ | ------ | --------------------------------------- |
+| `routeLoader`      | `rrl`  | 带中止信号的 loader                     |
+| `loaderDeps`       | `rld`  | 依赖 search 参数的 loader               |
+| `loaderStaleTime`  |        | `staleTime`、`gcTime`、`shouldReload`   |
+| `beforeLoad`       | `rbl`  | 在 loader 与子路由之前执行的钩子        |
+| `useLoaderData`    | `ruld` | loader 结果，其依赖键用 `useLoaderDeps` |
+| `loaderDeferred`   |        | 只 await 首屏所需，其余延后             |
+| `Await`            |        | 在 `Suspense` 下渲染延后的 promise      |
+| `routerInvalidate` |        | 重新执行所有已匹配的 loader             |
 
-| 模块        | 安装                                                               |
-| ----------- | ------------------------------------------------------------------ |
-| 路由        | `@tanstack/react-router@1`                                         |
-| 路由生成    | `@tanstack/router-plugin@1`，适用于 Vite、Rspack、webpack、esbuild |
-| 开发者工具  | `@tanstack/react-router-devtools@1`                                |
-| search 校验 | `zod@4`，或任意其他 Standard Schema 校验器                         |
-| 服务端状态  | `@tanstack/react-query@5`                                          |
-| 服务端渲染  | `@tanstack/react-router-ssr-query@1`，配合 TanStack Query          |
-| 全栈        | `@tanstack/react-start@1`                                          |
+### router context
 
-验证目标为 React 19。TypeScript 工程还需匹配的 React 类型包。
+| 前缀                   | 缩写   | 插入内容                            |
+| ---------------------- | ------ | ----------------------------------- |
+| `routeContext`         | `rc`   | 在 `beforeLoad` 中补充的 context 值 |
+| `useRouteContext`      | `rurc` | 从 context 中读取单个值             |
+| `routerRuntimeContext` |        | 创建时声明、渲染时注入的 context    |
 
-`validateSearch` 直接接受任何 Standard Schema 校验器，因此 Zod 只是其中一种选择而非必需，普通校验函数的写法同样已覆盖。`src/start/` 的片段假定使用 TanStack Start 构建，扩展的其余部分不作此假定。
+### 边界组件
 
-从源码自建，环境变量 `SNIPPETS_EXCLUDE` 可调整目录排除来源，如设为 `src/start/**,src/code-routes/**` 即只打包文件式、纯客户端的那部分。写进已被 git 忽略的 `.env`，该选择便不进入源码树；命令行传入的值优先于该文件。
+| 前缀                | 缩写   | 插入内容                                  |
+| ------------------- | ------ | ----------------------------------------- |
+| `errorComponent`    | `rec`  | 带 `reset` 按钮的错误状态                 |
+| `pendingComponent`  | `rpc`  | 带 `pendingMs`、`pendingMinMs` 的等待状态 |
+| `notFoundComponent` | `rnfc` | 单个路由的 not-found 状态                 |
+| `notFound`          | `rnf`  | 在 loader 中 `throw notFound()`           |
+| `routeBoundaries`   |        | 三者一并作为路由选项挂上                  |
+
+### TanStack Query
+
+| 前缀                 | 缩写   | 插入内容                                      |
+| -------------------- | ------ | --------------------------------------------- |
+| `ensureQueryData`    | `reqd` | 填充查询缓存的 loader                         |
+| `queryPrefetch`      |        | 启动较慢的查询，await 较快的那个              |
+| `queryRoute`         | `rqr`  | loader 与 `useSuspenseQuery` 共用同一个查询   |
+| `queryClientContext` |        | 把 `queryClient` 类型化到 router context 上   |
+| `routerSsrQuery`     |        | 每请求一套 router 与 query client，并接通 SSR |
+
+### TanStack Start
+
+| 前缀                 | 缩写   | 插入内容                                                       |
+| -------------------- | ------ | -------------------------------------------------------------- |
+| `createServerFn`     | `rcsf` | server function                                                |
+| `serverFnValidator`  | `rsfv` | 带校验的 server function                                       |
+| `createServerOnlyFn` |        | 不进入客户端产物的工具函数                                     |
+| `createIsomorphicFn` |        | 同一函数的服务端与客户端实现                                   |
+| `useServerFn`        | `rusf` | 在组件中调用 server function                                   |
+| `createMiddleware`   |        | 多个 server function 共用的中间件                              |
+| `startServerRoute`   | `rssr` | 路由文件中的 HTTP handler，带动态段用 `startServerRouteParams` |
+| `createServerEntry`  |        | 包裹默认 handler 的服务端入口                                  |
+| `startImport`        |        | 导入 TanStack Start API                                        |
+
+### 组合场景
+
+| 前缀                    | 缩写  | 插入内容                               |
+| ----------------------- | ----- | -------------------------------------- |
+| `routeGuard`            | `rg`  | 携带 href 重定向的鉴权无路径布局       |
+| `routeLoginRedirect`    |       | 把访问者送回该 href 的登录路由         |
+| `routePagination`       | `rrp` | 页码存于 URL，经 `loaderDeps` 传到查询 |
+| `routeFormSubmit`       | `rfs` | 服务端校验的提交、重定向与失效刷新     |
+| `routePendingIndicator` |       | 统一的导航进行中指示器                 |
 
 ## 官方依据
 

@@ -1,6 +1,9 @@
 {
   "TanStack Router root route": {
-    "prefix": "createRootRoute",
+    "prefix": [
+      "createRootRoute",
+      "rcrr"
+    ],
     "body": [
       "export const Route = createRootRoute({",
       "  component: ${1:RootLayout},",

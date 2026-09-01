@@ -1,6 +1,9 @@
 {
   "TanStack Router Link": {
-    "prefix": "Link",
+    "prefix": [
+      "Link",
+      "rl"
+    ],
     "body": [
       "<Link to=\"${1:/posts}\">${2:Posts}</Link>",
       "$0"
@@ -9,7 +12,10 @@
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router Link with params": {
-    "prefix": "LinkParams",
+    "prefix": [
+      "LinkParams",
+      "rlp"
+    ],
     "body": [
       "<Link to=\"${1:/posts}/\\$${2:postId}\" params={{ ${2}: ${3:post.id} }}>",
       "  $0",
@@ -29,7 +35,10 @@
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router active Link": {
-    "prefix": "LinkActive",
+    "prefix": [
+      "LinkActive",
+      "rla"
+    ],
     "body": [
       "<Link",
       "  to=\"${1:/posts}\"",
