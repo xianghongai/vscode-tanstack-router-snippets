@@ -1,0 +1,40 @@
+# TanStack Router Snippets
+
+## Ownership and scope
+
+- This is a declarative VS Code snippet extension. Source of truth is `src/<module>/*.json`; generated `snippets/` is ignored.
+- `scripts/build.ts` is the whole build. It keeps its two project-specific values (source glob, output path) in a `REPO-SPECIFIC CONFIG` block at the top, mirroring the sibling snippet repositories; the rest is generic.
+- This extension ships one generated `.code-snippets` file and dispatches per snippet via `scope`. The sibling repositories instead emit one file per language; `scripts/build.ts` deliberately does not support that model.
+- Do not add an extension host entrypoint, activation events, dependency installers, auto-import logic, telemetry, or production dependencies.
+- The router owns the URL, its path params and its search; TanStack Query owns server state. `src/query/` covers only the seam — filling the query cache from a loader, putting a `queryClient` on the router context, wiring SSR dehydration. TanStack Query's own API belongs to `vscode-react-ecosystem-snippets`, React Router v7 to `vscode-react-router-snippets`, React core and generic JavaScript to their existing owners. Never edit sibling repositories as part of work here.
+- File-based routing is the main path and assumes the route generator plus a `routeTree.gen` file. `src/code-routes/` is the deliberately small code-based counterpart; do not grow it into a parallel copy of every file-based snippet.
+- `src/start/` assumes a TanStack Start build. Nothing outside it may depend on Start.
+- `src/recipes/` owns the cross-module examples; capability folders must not duplicate them.
+
+## Snippet contract
+
+- Each top-level name is unique and identifies the library: names begin with `TanStack Router ` or `TanStack Start `. Use only standard VS Code fields: `prefix`, `body`, `description`, `scope`, and native `isFileTemplate` for complete files.
+- Every snippet has explicit scopes chosen from `javascript`, `javascriptreact`, `typescript`, `typescriptreact`. TypeScript syntax never targets JavaScript; JSX never targets plain JS/TS language modes. A body with neither declares all four.
+- TypeScript is the main line, because inference from the route tree is the point of this router. Author a JavaScript twin only where the JS shape is genuinely used — currently the application entry. Do not add `…Js`/`…Ts` prefix variants merely to keep a pair apart.
+- Prefixes are camelCase — never kebab-case. Use the real API name when the snippet is one API (`createFileRoute`, `useNavigate`, `useSearch`, `Link`, `notFound`, `createServerFn`), and a `<module>…` stem for a scenario (`routerEntry`, `fileRouteLayout`, `loaderDeps`, `searchMiddleware`, `routeGuard`). Prefixes may repeat, here and across companion extensions: VS Code triggers on prefix but identifies a snippet by name, and offers same-prefix candidates side by side labelled by name. Only the name must be unique.
+- Separate imports from fragments. Full file templates include imports; fragments document required imports and insertion position. A fragment that is a route option says so — "Insert as a route option inside createFileRoute."
+- Each body contains one final `$0`; editable numbered placeholders have meaningful defaults and use mirrors for repeated identifiers. A literal dollar in a route path (`/posts/$postId`, `/{-$locale}`, the splat `$`) must be escaped as `\$` in the body.
+- Parameterize what a developer renames — route path, component, param, loader function, query options factory, service module — and leave illustrative field names as literals so the Tab sequence stays short. A TypeScript annotation that repeats a parameterized name must mirror it, not restate the default.
+- `$0` sits on its own line at the end of the body, or inside an element or callback body the developer fills in. Never place it immediately before literal text or an expression: a `$0` with nowhere natural to go means the body needs a real continuation point, not a filler position.
+- Use English names/API spellings. Descriptions are `English sentence. Requirement sentence.` then a blank line then `中文句；需要……。` — one language per paragraph, never an English clause trailing a Chinese one. Example paths and names are neutral, editable and relative; no private aliases, hosts, credentials or copied business code.
+- Stable API targets: TanStack Router 1, TanStack Start 1, router-plugin 1, router-devtools 1, router-ssr-query 1, TanStack Query 5, Zod 4, React 19. Patch versions are locked in `pnpm-lock.yaml`.
+
+## Commands and verification
+
+- Development uses Node.js 24 and pnpm 11. `mise install` prepares the declared tools; `pnpm install --frozen-lockfile` installs development dependencies.
+- `pnpm test`: expand every snippet to its placeholder defaults and parse the result with each targeted language's grammar. Syntax only — it must never grow assertions about what the expanded code does, nor type-check against dependency types. Because the parser tries the top level, an object body and a function body, a fragment containing `await` must sit inside an `async` function in the body.
+- `pnpm run lint`: oxlint over `scripts` and `tests`. Snippet JSON is data, not linted code.
+- `pnpm run format:check`: oxfmt gate; `pnpm run format` is an explicit source mutation. `src/**` is excluded because a snippet `body` is one array element per emitted line, and reflowing it to the print width destroys that correspondence.
+- `pnpm run build`: deterministically aggregate sources into one scoped `.code-snippets` file. It reads `SNIPPETS_EXCLUDE` — comma-separated globs, from the environment or an optional gitignored `.env` — so someone building from source can drop directories that do not apply to their project. Unset means every source is included. Do not delete that plumbing as unused just because the repository ships no `.env`. Released builds ship every source; a consumer of the published extension prunes candidates with "Hide from IntelliSense" in `Insert Snippet` instead, which persists per profile and survives extension updates.
+- `pnpm run package`: run prepublish checks then `vsce package --no-dependencies`. Never publish, commit, push, create a remote repository or install the extension without explicit instruction.
+- Optional native `keytar` and `@vscode/vsce-sign` install scripts are disabled because unsigned VSIX packaging does not need them. Do not broadly enable dependency install scripts.
+- If adding Bash/Zsh scripts, all execution, syntax, lint and behavioral tests must run in disposable Docker containers with source read-only and no credentials/network/socket by default. Never fall back to host execution; Linux containers do not prove macOS/BSD runtime compatibility.
+
+## Delivery
+
+Snippets target the dependency versions listed above and the everyday scenarios of TanStack Router; do not add defensive validation that re-proves what those conventions already settle. Those packages are installed as devDependencies for one purpose only: reading their published `.d.ts` so a snippet's signature is copied from the source of truth rather than from memory. Read them, never build a check against them — no fixture type-checking, no compiling expansions, no runtime assertions about library behaviour. The extension itself has no runtime dependency on any of them and the VSIX carries none. Report exactly which checks ran; a green build is not editor acceptance, so verify insertion, Tab order and the final cursor by hand in the Extension Development Host. External skills are optional; these rules and commands are sufficient on their own.

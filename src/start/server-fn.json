@@ -1,0 +1,64 @@
+{
+  "TanStack Start server function": {
+    "prefix": "createServerFn",
+    "body": [
+      "export const ${1:fetchPosts} = createServerFn().handler(async () => {",
+      "  $0",
+      "});"
+    ],
+    "description": "Define a function that runs only on the server and is callable from the client as an RPC. Requires createServerFn from @tanstack/react-start.\n\n定义只在服务端执行、客户端可作为 RPC 调用的函数；需要 @tanstack/react-start 的 createServerFn。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Start server function with validator": {
+    "prefix": "serverFnValidator",
+    "body": [
+      "export const ${1:updateUser} = createServerFn({ method: 'POST' })",
+      "  .validator(${2:userSchema})",
+      "  .handler(async ({ data }) => {",
+      "    $0",
+      "  });"
+    ],
+    "description": "Validate the payload before the handler runs; the validator accepts any Standard Schema validator, such as a Zod schema. Requires createServerFn from @tanstack/react-start.\n\n在 handler 执行前校验入参，validator 接受任何 Standard Schema 校验器，例如 Zod schema；需要 @tanstack/react-start 的 createServerFn。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Start server-only function": {
+    "prefix": "createServerOnlyFn",
+    "body": [
+      "const ${1:getDatabaseUrl} = createServerOnlyFn(() => ${2:process.env.DATABASE_URL});",
+      "$0"
+    ],
+    "description": "Wrap a helper that must never reach the client bundle; calling it from the browser throws. Unlike a server function it is not an RPC. Requires createServerOnlyFn from @tanstack/react-start.\n\n包裹绝不能进入客户端产物的工具函数，在浏览器中调用会抛错；它不是 RPC，与 server function 不同；需要 @tanstack/react-start 的 createServerOnlyFn。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Start isomorphic function": {
+    "prefix": "createIsomorphicFn",
+    "body": [
+      "const ${1:getBaseUrl} = createIsomorphicFn()",
+      "  .server(() => ${2:process.env.BASE_URL})",
+      "  .client(() => ${3:window.location.origin});",
+      "$0"
+    ],
+    "description": "Give one function a server implementation and a client implementation; each build keeps only its own. Requires createIsomorphicFn from @tanstack/react-start.\n\n为同一个函数分别提供服务端与客户端实现，各自的产物只保留对应那份；需要 @tanstack/react-start 的 createIsomorphicFn。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Start useServerFn": {
+    "prefix": "useServerFn",
+    "body": [
+      "const ${1:updateUser} = useServerFn(${2:updateUserFn});",
+      "$0"
+    ],
+    "description": "Call a server function from a component so redirects and not-found responses it throws are handled by the router. Requires useServerFn from @tanstack/react-start.\n\n在组件中调用 server function，使其抛出的 redirect 与 not-found 由 router 接管；需要 @tanstack/react-start 的 useServerFn。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Start middleware": {
+    "prefix": "createMiddleware",
+    "body": [
+      "export const ${1:authMiddleware} = createMiddleware({ type: 'function' }).server(async ({ next }) => {",
+      "  $0",
+      "  return next({ context: { ${2:user} } });",
+      "});"
+    ],
+    "description": "Share work across server functions; what next receives as context is merged into the handler's context. Requires createMiddleware from @tanstack/react-start.\n\n在多个 server function 之间复用逻辑，传给 next 的 context 会并入 handler 的 context；需要 @tanstack/react-start 的 createMiddleware。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  }
+}

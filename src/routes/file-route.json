@@ -1,0 +1,165 @@
+{
+  "TanStack Router file route": {
+    "prefix": "createFileRoute",
+    "body": [
+      "export const Route = createFileRoute('${1:/posts}')({",
+      "  component: ${2:PostsPage},",
+      "});",
+      "",
+      "function ${2}() {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Declare a file route and its component. The path argument is rewritten by the route generator to match the file's location. Requires createFileRoute from @tanstack/react-router.\n\n声明文件式路由及其组件；路径实参由路由生成器按文件位置改写；需要 @tanstack/react-router 的 createFileRoute。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router file route with dynamic segment": {
+    "prefix": "fileRouteParam",
+    "body": [
+      "export const Route = createFileRoute('${1:/posts}/\\$${2:postId}')({",
+      "  loader: ({ params }) => ${3:fetchPost}(params.${2}),",
+      "  component: ${4:PostPage},",
+      "});",
+      "",
+      "function ${4}() {",
+      "  const { ${2} } = Route.useParams();",
+      "  const ${5:post} = Route.useLoaderData();",
+      "",
+      "  return (",
+      "    <article>",
+      "      $0",
+      "    </article>",
+      "  );",
+      "}"
+    ],
+    "description": "Declare a route with a dynamic segment, load by it and read it in the component. Requires createFileRoute from @tanstack/react-router.\n\n声明带动态段的路由，按该段加载数据并在组件中读取；需要 @tanstack/react-router 的 createFileRoute。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router file route with optional segment": {
+    "prefix": "fileRouteOptionalParam",
+    "body": [
+      "export const Route = createFileRoute('/{-\\$${1:locale}}${2:/shop}')({",
+      "  component: ${3:ShopPage},",
+      "});",
+      "",
+      "function ${3}() {",
+      "  const { ${1} } = Route.useParams();",
+      "",
+      "  return (",
+      "    <section>",
+      "      $0",
+      "    </section>",
+      "  );",
+      "}"
+    ],
+    "description": "Declare a route whose leading segment may be absent; the param is then undefined. Requires createFileRoute from @tanstack/react-router.\n\n声明前导段可缺省的路由，缺省时该参数为 undefined；需要 @tanstack/react-router 的 createFileRoute。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router splat route": {
+    "prefix": "fileRouteSplat",
+    "body": [
+      "export const Route = createFileRoute('${1:/files}/\\$')({",
+      "  component: ${2:FilesPage},",
+      "});",
+      "",
+      "function ${2}() {",
+      "  const { _splat } = Route.useParams();",
+      "",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Match the rest of the pathname and read it from the _splat param. Requires createFileRoute from @tanstack/react-router.\n\n匹配剩余路径，并通过 _splat 参数读取；需要 @tanstack/react-router 的 createFileRoute。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router layout route": {
+    "prefix": "fileRouteLayout",
+    "body": [
+      "export const Route = createFileRoute('${1:/dashboard}')({",
+      "  component: ${2:DashboardLayout},",
+      "});",
+      "",
+      "function ${2}() {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "      <Outlet />",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Declare a route that wraps its children; the children render at the Outlet. Requires createFileRoute and Outlet from @tanstack/react-router.\n\n声明包裹子路由的布局路由，子路由渲染在 Outlet 处；需要 @tanstack/react-router 的 createFileRoute 与 Outlet。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router pathless layout route": {
+    "prefix": "fileRoutePathless",
+    "body": [
+      "export const Route = createFileRoute('/_${1:authenticated}')({",
+      "  component: ${2:AuthenticatedLayout},",
+      "});",
+      "",
+      "function ${2}() {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "      <Outlet />",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Declare a layout that groups routes without adding a URL segment; the file name starts with an underscore. Requires createFileRoute and Outlet from @tanstack/react-router.\n\n声明不产生 URL 段的分组布局，文件名以下划线开头；需要 @tanstack/react-router 的 createFileRoute 与 Outlet。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router lazy file route": {
+    "prefix": "createLazyFileRoute",
+    "body": [
+      "export const Route = createLazyFileRoute('${1:/posts}')({",
+      "  component: ${2:PostsPage},",
+      "});",
+      "",
+      "function ${2}() {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Put the component of a route in a .lazy file so it is loaded on demand; the non-lazy file keeps loader, beforeLoad and validateSearch. Requires createLazyFileRoute from @tanstack/react-router.\n\n把路由组件放进 .lazy 文件以按需加载，loader、beforeLoad 与 validateSearch 留在非 lazy 文件里；需要 @tanstack/react-router 的 createLazyFileRoute。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router route module (TypeScript)": {
+    "prefix": "routeModule",
+    "isFileTemplate": true,
+    "body": [
+      "import { createFileRoute } from '@tanstack/react-router';",
+      "import { ${1:fetchPost} } from '${2:./service}';",
+      "",
+      "export const Route = createFileRoute('${3:/posts}/\\$${4:postId}')({",
+      "  loader: ({ params }) => ${1}(params.${4}),",
+      "  component: ${5:PostPage},",
+      "  errorComponent: ({ error }) => <p role=\"alert\">{error.message}</p>,",
+      "  pendingComponent: () => <p>Loading…</p>,",
+      "});",
+      "",
+      "function ${5}() {",
+      "  const ${6:post} = Route.useLoaderData();",
+      "",
+      "  return (",
+      "    <article>",
+      "      $0",
+      "    </article>",
+      "  );",
+      "}"
+    ],
+    "description": "Complete route module with loader, component, error and pending states. Requires @tanstack/react-router and a request function of your own.\n\n完整的路由模块，含 loader、组件、错误与等待状态；需要 @tanstack/react-router，以及自建的请求函数。",
+    "scope": "typescriptreact"
+  }
+}

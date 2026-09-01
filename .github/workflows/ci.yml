@@ -1,0 +1,41 @@
+on:
+  push:
+    tags:
+      - 'v*'
+
+name: Package VS Code Extension — GitHub Action
+run-name: 'Release: ${{ github.ref_name }}'
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    env:
+      # `.env` is gitignored and never reaches CI, so the build reads this instead.
+      # Leave the repository variable unset to package every source, which is the
+      # released shape; set it to produce a flavored build (see `scripts/build.ts`).
+      SNIPPETS_EXCLUDE: ${{ vars.SNIPPETS_EXCLUDE }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup mise (Node.js + pnpm)
+        uses: jdx/mise-action@v4
+
+      - name: Install the dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Test
+        run: pnpm run test
+
+      - name: Publish
+        run: pnpm run publish
+        env:
+          VSCE_PAT: ${{ secrets.VS_MARKETPLACE_TOKEN }}

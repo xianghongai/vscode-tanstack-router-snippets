@@ -1,0 +1,60 @@
+{
+  "TanStack Router code-based root route": {
+    "prefix": "codeRootRoute",
+    "body": [
+      "const rootRoute = createRootRoute({",
+      "  component: ${1:RootLayout},",
+      "});",
+      "",
+      "function ${1}() {",
+      "  return (",
+      "    <>",
+      "      $0",
+      "      <Outlet />",
+      "    </>",
+      "  );",
+      "}"
+    ],
+    "description": "Declare the root route of a code-based route tree, for projects that do not run the route generator. Requires createRootRoute and Outlet from @tanstack/react-router.\n\n为不运行路由生成器的工程声明代码式路由树的根路由；需要 @tanstack/react-router 的 createRootRoute 与 Outlet。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router code-based route": {
+    "prefix": "createRoute",
+    "body": [
+      "const ${1:postsRoute} = createRoute({",
+      "  getParentRoute: () => ${2:rootRoute},",
+      "  path: '${3:/posts}',",
+      "  loader: () => ${4:fetchPosts}(),",
+      "  component: ${5:PostsPage},",
+      "});",
+      "$0"
+    ],
+    "description": "Declare a route in a code-based route tree and attach it to its parent. Requires createRoute from @tanstack/react-router.\n\n在代码式路由树中声明路由并挂到父路由；需要 @tanstack/react-router 的 createRoute。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Router code-based route tree": {
+    "prefix": "codeRouteTree",
+    "body": [
+      "const routeTree = ${1:rootRoute}.addChildren([",
+      "  ${2:indexRoute},",
+      "  ${3:postsRoute}.addChildren([${4:postRoute}]),",
+      "]);",
+      "$0"
+    ],
+    "description": "Assemble a code-based route tree; the result is passed to createRouter as routeTree. Requires routes created with createRoute.\n\n组装代码式路由树，结果作为 routeTree 传给 createRouter；需要用 createRoute 创建的路由。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Router code-based lazy route": {
+    "prefix": "codeRouteLazy",
+    "body": [
+      "const ${1:postsRoute} = createRoute({",
+      "  getParentRoute: () => ${2:rootRoute},",
+      "  path: '${3:/posts}',",
+      "  loader: () => ${4:fetchPosts}(),",
+      "}).lazy(() => import('${5:./posts.lazy}').then((module) => module.Route));",
+      "$0"
+    ],
+    "description": "Split a code-based route so its component loads on demand; the lazy module exports a Route made with createLazyRoute. Requires createRoute from @tanstack/react-router.\n\n拆分代码式路由使其组件按需加载，lazy 模块导出由 createLazyRoute 创建的 Route；需要 @tanstack/react-router 的 createRoute。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  }
+}

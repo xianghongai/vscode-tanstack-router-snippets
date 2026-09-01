@@ -1,0 +1,50 @@
+{
+  "TanStack Router useParams from route": {
+    "prefix": "useParams",
+    "body": [
+      "const { ${1:postId} } = Route.useParams();",
+      "$0"
+    ],
+    "description": "Read this route's path params inside its own component. Requires the Route exported by the route module.\n\n在路由自身的组件中读取路径参数；需要该路由模块导出的 Route。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Router useParams by route id": {
+    "prefix": "useParams",
+    "body": [
+      "const { ${1:postId} } = useParams({ from: '${2:/posts}/\\$${1}' });",
+      "$0"
+    ],
+    "description": "Read a route's path params from a component that lives outside that route module. Requires useParams from @tanstack/react-router.\n\n在路由模块之外的组件中读取某个路由的路径参数；需要 @tanstack/react-router 的 useParams。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Router getRouteApi": {
+    "prefix": "getRouteApi",
+    "body": [
+      "const ${1:postRoute} = getRouteApi('${2:/posts}/\\$${3:postId}');",
+      "",
+      "export function ${4:PostTitle}() {",
+      "  const ${5:post} = ${1}.useLoaderData();",
+      "",
+      "  return (",
+      "    <h1>",
+      "      $0",
+      "    </h1>",
+      "  );",
+      "}"
+    ],
+    "description": "Bind a component outside the route module to one route, so its loader data, params and search stay typed without passing from on every call. Requires getRouteApi from @tanstack/react-router.\n\n把路由模块之外的组件绑定到某个路由，使其 loader 数据、params 与 search 保持类型化，无需每次传 from；需要 @tanstack/react-router 的 getRouteApi。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router params parse and stringify": {
+    "prefix": "routeParams",
+    "body": [
+      "params: {",
+      "  parse: (params) => ({ ${1:postId}: Number(params.${1}) }),",
+      "  stringify: ({ ${1} }) => ({ ${1}: String(${1}) }),",
+      "},",
+      "$0"
+    ],
+    "description": "Convert a path param between its URL string and the type the route works with. Insert as a route option inside createFileRoute.\n\n在 URL 字符串与路由实际使用的类型之间转换路径参数；作为 createFileRoute 的路由选项插入。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  }
+}

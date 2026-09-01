@@ -1,0 +1,66 @@
+{
+  "TanStack Router createRouter": {
+    "prefix": "createRouter",
+    "body": [
+      "export const ${1:router} = createRouter({",
+      "  routeTree,",
+      "  defaultPreload: 'intent',",
+      "  defaultPreloadStaleTime: ${2:0},",
+      "  scrollRestoration: true,",
+      "});",
+      "$0"
+    ],
+    "description": "Create the router from the generated route tree. Requires createRouter from @tanstack/react-router and routeTree from ./routeTree.gen.\n\n用生成的路由树创建 router；需要 @tanstack/react-router 的 createRouter，以及 ./routeTree.gen 导出的 routeTree。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Router type registration": {
+    "prefix": "routerRegister",
+    "body": [
+      "declare module '@tanstack/react-router' {",
+      "  interface Register {",
+      "    router: typeof ${1:router};",
+      "  }",
+      "}",
+      "$0"
+    ],
+    "description": "Register the router instance so every route path, param and search field is inferred globally. Place it in the module that creates the router.\n\n注册 router 实例，使全局的路由路径、参数与 search 字段获得类型推导；写在创建 router 的模块里。",
+    "scope": "typescript,typescriptreact"
+  },
+  "TanStack Router RouterProvider": {
+    "prefix": "RouterProvider",
+    "body": [
+      "export function ${1:App}() {",
+      "  return <RouterProvider router={${2:router}} />;",
+      "}",
+      "$0"
+    ],
+    "description": "Render the router at the top of the application. Requires RouterProvider from @tanstack/react-router.\n\n在应用顶层渲染 router；需要 @tanstack/react-router 的 RouterProvider。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router devtools": {
+    "prefix": "TanStackRouterDevtools",
+    "body": [
+      "<TanStackRouterDevtools position=\"${1:bottom-right}\" />",
+      "$0"
+    ],
+    "description": "Mount the router devtools inside the root route component, next to its Outlet. Requires TanStackRouterDevtools from @tanstack/react-router-devtools.\n\n在根路由组件内、Outlet 旁挂载路由开发者工具；需要 @tanstack/react-router-devtools 的 TanStackRouterDevtools。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router Vite plugin": {
+    "prefix": "routerVitePlugin",
+    "body": [
+      "plugins: [",
+      "  tanstackRouter({",
+      "    target: 'react',",
+      "    routesDirectory: '${1:src/routes}',",
+      "    generatedRouteTree: '${2:src/routeTree.gen.ts}',",
+      "    autoCodeSplitting: true,",
+      "  }),",
+      "  react(),",
+      "],",
+      "$0"
+    ],
+    "description": "Register the route generator in a Vite config. It must come before the React plugin. Requires tanstackRouter from @tanstack/router-plugin/vite.\n\n在 Vite 配置中注册路由生成器，必须排在 React 插件之前；需要 @tanstack/router-plugin/vite 的 tanstackRouter。",
+    "scope": "javascript,typescript"
+  }
+}

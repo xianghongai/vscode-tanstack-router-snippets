@@ -1,0 +1,52 @@
+{
+  "TanStack Router validateSearch with Zod": {
+    "prefix": "validateSearch",
+    "body": [
+      "const ${1:productSearchSchema} = z.object({",
+      "  page: z.number().catch(${2:1}),",
+      "  filter: z.string().catch(''),",
+      "  sort: z.enum(['newest', 'oldest', 'price']).catch('newest'),",
+      "});",
+      "",
+      "export const Route = createFileRoute('${3:/shop/products}')({",
+      "  validateSearch: ${1},",
+      "});",
+      "$0"
+    ],
+    "description": "Validate search params with a Zod schema; TanStack Router accepts any Standard Schema validator directly. catch keeps a malformed URL usable instead of throwing. Requires zod and createFileRoute from @tanstack/react-router.\n\n用 Zod schema 校验 search 参数，TanStack Router 直接接受任何 Standard Schema 校验器；catch 让格式不合法的 URL 仍可用而不是抛错；需要 zod，以及 @tanstack/react-router 的 createFileRoute。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Router validateSearch by hand (TypeScript)": {
+    "prefix": "validateSearch",
+    "body": [
+      "type ${1:ProductSearch} = {",
+      "  page: number;",
+      "  filter: string;",
+      "};",
+      "",
+      "export const Route = createFileRoute('${2:/shop/products}')({",
+      "  validateSearch: (search: Record<string, unknown>): ${1} => ({",
+      "    page: Number(search.page ?? 1),",
+      "    filter: (search.filter as string) || '',",
+      "  }),",
+      "});",
+      "$0"
+    ],
+    "description": "Validate search params with a plain function when no schema library is in use; the return type is what every consumer of this route sees. Requires createFileRoute from @tanstack/react-router.\n\n不引入 schema 库时用普通函数校验 search 参数，其返回类型即该路由所有使用方看到的类型；需要 @tanstack/react-router 的 createFileRoute。",
+    "scope": "typescript,typescriptreact"
+  },
+  "TanStack Router search middleware": {
+    "prefix": "searchMiddleware",
+    "body": [
+      "export const Route = createFileRoute('${1:/shop/products}')({",
+      "  validateSearch: ${2:productSearchSchema},",
+      "  search: {",
+      "    middlewares: [retainSearchParams(['${3:filter}']), stripSearchParams({ page: 1 })],",
+      "  },",
+      "});",
+      "$0"
+    ],
+    "description": "Carry chosen search params across navigations and keep default values out of the URL. Requires retainSearchParams, stripSearchParams and createFileRoute from @tanstack/react-router.\n\n让选定的 search 参数跨导航保留，并把默认值从 URL 中剔除；需要 @tanstack/react-router 的 retainSearchParams、stripSearchParams 与 createFileRoute。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  }
+}

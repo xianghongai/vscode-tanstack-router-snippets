@@ -1,0 +1,22 @@
+{
+  "TanStack Router global navigation indicator": {
+    "prefix": "routePendingIndicator",
+    "body": [
+      "function ${1:NavigationIndicator}() {",
+      "  const isNavigating = useRouterState({ select: (state) => state.status === 'pending' });",
+      "",
+      "  if (!isNavigating) {",
+      "    return null;",
+      "  }",
+      "",
+      "  return (",
+      "    <div role=\"status\" aria-live=\"polite\">",
+      "      $0",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Show one indicator for any in-flight navigation; render it in the root route component, next to the Outlet. Requires useRouterState from @tanstack/react-router.\n\n为任何进行中的导航展示统一指示器，渲染在根路由组件中、Outlet 旁；需要 @tanstack/react-router 的 useRouterState。",
+    "scope": "javascriptreact,typescriptreact"
+  }
+}

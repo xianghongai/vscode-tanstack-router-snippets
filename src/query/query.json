@@ -1,0 +1,80 @@
+{
+  "TanStack Router loader ensureQueryData": {
+    "prefix": "ensureQueryData",
+    "body": [
+      "loader: ({ context }) => context.queryClient.ensureQueryData(${1:postsQueryOptions}),",
+      "$0"
+    ],
+    "description": "Fill the query cache before the route renders, so the component's query resolves synchronously. Requires a queryClient on the router context and a queryOptions factory.\n\n在路由渲染前填充查询缓存，使组件中的查询同步命中；需要 router context 上的 queryClient，以及一个 queryOptions 工厂。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Router loader prefetchQuery": {
+    "prefix": "queryPrefetch",
+    "body": [
+      "loader: async ({ context }) => {",
+      "  context.queryClient.prefetchQuery(${1:commentsQueryOptions});",
+      "  await context.queryClient.ensureQueryData(${2:postQueryOptions});",
+      "},",
+      "$0"
+    ],
+    "description": "Start a slow query without blocking the navigation while awaiting the one the first paint needs. Requires a queryClient on the router context.\n\n不阻塞导航地启动较慢的查询，同时 await 首屏所需的那个；需要 router context 上的 queryClient。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Router route with suspense query": {
+    "prefix": "queryRoute",
+    "body": [
+      "export const Route = createFileRoute('${1:/posts}')({",
+      "  loader: ({ context }) => context.queryClient.ensureQueryData(${2:postsQueryOptions}),",
+      "  component: ${3:PostsPage},",
+      "});",
+      "",
+      "function ${3}() {",
+      "  const { data: ${4:posts} } = useSuspenseQuery(${2});",
+      "",
+      "  return (",
+      "    <ul>",
+      "      $0",
+      "    </ul>",
+      "  );",
+      "}"
+    ],
+    "description": "Preload in the loader and read the same query in the component, so the data is never pending on first render. Requires createFileRoute from @tanstack/react-router, useSuspenseQuery from @tanstack/react-query and a queryClient on the router context.\n\n在 loader 预取、在组件中读取同一个查询，首次渲染便不会处于 pending；需要 @tanstack/react-router 的 createFileRoute、@tanstack/react-query 的 useSuspenseQuery，以及 router context 上的 queryClient。",
+    "scope": "javascriptreact,typescriptreact"
+  },
+  "TanStack Router queryClient in router context (TypeScript)": {
+    "prefix": "queryClientContext",
+    "body": [
+      "export const Route = createRootRouteWithContext<{",
+      "  queryClient: QueryClient;",
+      "}>()({",
+      "  component: ${1:RootLayout},",
+      "});",
+      "$0"
+    ],
+    "description": "Type the router context so every loader can reach the query client. The same client must be passed to createRouter as context and to QueryClientProvider. Requires createRootRouteWithContext from @tanstack/react-router and the QueryClient type from @tanstack/react-query.\n\n为 router context 声明类型，使所有 loader 都能取到 query client；同一个 client 必须同时传给 createRouter 的 context 与 QueryClientProvider；需要 @tanstack/react-router 的 createRootRouteWithContext，以及 @tanstack/react-query 的 QueryClient 类型。",
+    "scope": "typescript,typescriptreact"
+  },
+  "TanStack Router SSR query integration": {
+    "prefix": "routerSsrQuery",
+    "body": [
+      "export function ${1:getRouter}() {",
+      "  const queryClient = new QueryClient();",
+      "",
+      "  const router = createRouter({",
+      "    routeTree,",
+      "    context: { queryClient },",
+      "    defaultPreload: 'intent',",
+      "    defaultPreloadStaleTime: 0,",
+      "    scrollRestoration: true,",
+      "  });",
+      "",
+      "  setupRouterSsrQueryIntegration({ router, queryClient });",
+      "",
+      "  return router;",
+      "}",
+      "$0"
+    ],
+    "description": "Build one router and one query client per request and let them share dehydration. Requires createRouter from @tanstack/react-router, QueryClient from @tanstack/react-query and setupRouterSsrQueryIntegration from @tanstack/react-router-ssr-query.\n\n每个请求创建一套 router 与 query client 并共享脱水数据；需要 @tanstack/react-router 的 createRouter、@tanstack/react-query 的 QueryClient，以及 @tanstack/react-router-ssr-query 的 setupRouterSsrQueryIntegration。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  }
+}

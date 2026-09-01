@@ -1,0 +1,62 @@
+{
+  "TanStack Router application entry (TypeScript)": {
+    "prefix": "routerEntry",
+    "isFileTemplate": true,
+    "body": [
+      "import { RouterProvider, createRouter } from '@tanstack/react-router';",
+      "import { StrictMode } from 'react';",
+      "import { createRoot } from 'react-dom/client';",
+      "import { routeTree } from './routeTree.gen';",
+      "",
+      "const router = createRouter({",
+      "  routeTree,",
+      "  defaultPreload: 'intent',",
+      "  scrollRestoration: true,",
+      "});",
+      "",
+      "declare module '@tanstack/react-router' {",
+      "  interface Register {",
+      "    router: typeof router;",
+      "  }",
+      "}",
+      "",
+      "const rootElement = document.getElementById('${1:root}')!;",
+      "",
+      "createRoot(rootElement).render(",
+      "  <StrictMode>",
+      "    <RouterProvider router={router} />",
+      "  </StrictMode>",
+      ");",
+      "$0"
+    ],
+    "description": "Complete typed application entry: create the router, register its types and mount it. Requires @tanstack/react-router, react, react-dom and a generated ./routeTree.gen.\n\n完整的类型化应用入口：创建 router、注册类型并挂载；需要 @tanstack/react-router、react、react-dom，以及已生成的 ./routeTree.gen。",
+    "scope": "typescriptreact"
+  },
+  "TanStack Router application entry (JavaScript)": {
+    "prefix": "routerEntry",
+    "isFileTemplate": true,
+    "body": [
+      "import { RouterProvider, createRouter } from '@tanstack/react-router';",
+      "import { StrictMode } from 'react';",
+      "import { createRoot } from 'react-dom/client';",
+      "import { routeTree } from './routeTree.gen';",
+      "",
+      "const router = createRouter({",
+      "  routeTree,",
+      "  defaultPreload: 'intent',",
+      "  scrollRestoration: true,",
+      "});",
+      "",
+      "const rootElement = document.getElementById('${1:root}');",
+      "",
+      "createRoot(rootElement).render(",
+      "  <StrictMode>",
+      "    <RouterProvider router={router} />",
+      "  </StrictMode>",
+      ");",
+      "$0"
+    ],
+    "description": "Complete application entry: create the router and mount it. Requires @tanstack/react-router, react, react-dom and a generated ./routeTree.gen.\n\n完整的应用入口：创建 router 并挂载；需要 @tanstack/react-router、react、react-dom，以及已生成的 ./routeTree.gen。",
+    "scope": "javascriptreact"
+  }
+}

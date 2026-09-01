@@ -1,0 +1,20 @@
+{
+  "TanStack Router import": {
+    "prefix": "routerImport",
+    "body": [
+      "import { ${1:useNavigate} } from '@tanstack/react-router';",
+      "$0"
+    ],
+    "description": "Import a TanStack Router v1 API.\n\n导入 TanStack Router v1 API。",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact"
+  },
+  "TanStack Router type import": {
+    "prefix": "routerTypeImport",
+    "body": [
+      "import type { ${1:ErrorComponentProps} } from '@tanstack/react-router';",
+      "$0"
+    ],
+    "description": "Import a TanStack Router v1 type.\n\n导入 TanStack Router v1 类型。",
+    "scope": "typescript,typescriptreact"
+  }
+}

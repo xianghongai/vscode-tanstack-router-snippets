@@ -1,0 +1,16 @@
+{
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "endOfLine": "lf",
+  "insertFinalNewline": true,
+  "printWidth": 120,
+  "proseWrap": "preserve",
+  "quoteProps": "as-needed",
+  "semi": true,
+  "singleQuote": true,
+  "sortPackageJson": false,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "useTabs": false,
+  "ignorePatterns": [".cache/**", "node_modules/**", "snippets/**", "src/**", "pnpm-lock.yaml", "LICENSE"]
+}
