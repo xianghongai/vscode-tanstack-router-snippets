@@ -1,40 +1,37 @@
 {
-  "TanStack Router paginated list route (TypeScript)": {
-    "prefix": [
-      "routePagination",
-      "rrp"
-    ],
-    "isFileTemplate": true,
-    "body": [
-      "import { Link, createFileRoute } from '@tanstack/react-router';",
-      "import { useSuspenseQuery } from '@tanstack/react-query';",
-      "import { z } from 'zod';",
-      "import { ${1:postsQueryOptions} } from '${2:./service}';",
-      "",
-      "export const Route = createFileRoute('${3:/posts}')({",
-      "  validateSearch: z.object({",
-      "    page: z.number().catch(1),",
-      "  }),",
-      "  loaderDeps: ({ search }) => ({ page: search.page }),",
-      "  loader: ({ context, deps }) => context.queryClient.ensureQueryData(${1}(deps.page)),",
-      "  component: ${4:PostsPage},",
-      "});",
-      "",
-      "function ${4}() {",
-      "  const { page } = Route.useSearch();",
-      "  const { data: ${5:posts} } = useSuspenseQuery(${1}(page));",
-      "",
-      "  return (",
-      "    <div>",
-      "      $0",
-      "      <Link to=\".\" search={(previous) => ({ ...previous, page: previous.page + 1 })}>",
-      "        Next",
-      "      </Link>",
-      "    </div>",
-      "  );",
-      "}"
-    ],
-    "description": "Complete list route whose page number lives in the URL: the search schema owns it, loaderDeps makes the loader re-run on it, and the component reads the same query the loader filled. Requires @tanstack/react-router, @tanstack/react-query, zod, a queryClient on the router context and a queryOptions factory of your own.\n\n完整的列表路由，页码存放在 URL 中：search schema 拥有它，loaderDeps 让 loader 随之重新执行，组件读取 loader 已填充的同一个查询；需要 @tanstack/react-router、@tanstack/react-query、zod、router context 上的 queryClient，以及自建的 queryOptions 工厂。",
-    "scope": "typescriptreact"
-  }
+	"TanStack Router paginated list route (TypeScript)": {
+		"prefix": ["routePagination", "rrp"],
+		"isFileTemplate": true,
+		"body": [
+			"import { Link, createFileRoute } from '@tanstack/react-router';",
+			"import { useSuspenseQuery } from '@tanstack/react-query';",
+			"import { z } from 'zod';",
+			"import { ${1:postsQueryOptions} } from '${2:./service}';",
+			"",
+			"export const Route = createFileRoute('${3:/posts}')({",
+			"  validateSearch: z.object({",
+			"    page: z.number().catch(1),",
+			"  }),",
+			"  loaderDeps: ({ search }) => ({ page: search.page }),",
+			"  loader: ({ context, deps }) => context.queryClient.ensureQueryData(${1}(deps.page)),",
+			"  component: ${4:PostsPage},",
+			"});",
+			"",
+			"function ${4}() {",
+			"  const { page } = Route.useSearch();",
+			"  const { data: ${5:posts} } = useSuspenseQuery(${1}(page));",
+			"",
+			"  return (",
+			"    <div>",
+			"      $0",
+			"      <Link to=\".\" search={(previous) => ({ ...previous, page: previous.page + 1 })}>",
+			"        Next",
+			"      </Link>",
+			"    </div>",
+			"  );",
+			"}"
+		],
+		"description": "Complete list route whose page number lives in the URL: the search schema owns it, loaderDeps makes the loader re-run on it, and the component reads the same query the loader filled. Requires @tanstack/react-router, @tanstack/react-query, zod, a queryClient on the router context and a queryOptions factory of your own.\n\n完整的列表路由，页码存放在 URL 中：search schema 拥有它，loaderDeps 让 loader 随之重新执行，组件读取 loader 已填充的同一个查询；需要 @tanstack/react-router、@tanstack/react-query、zod、router context 上的 queryClient，以及自建的 queryOptions 工厂。",
+		"scope": "typescriptreact"
+	}
 }

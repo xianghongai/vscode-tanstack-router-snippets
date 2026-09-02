@@ -1,108 +1,84 @@
 {
-  "TanStack Router useNavigate": {
-    "prefix": [
-      "useNavigate",
-      "run"
-    ],
-    "body": [
-      "const navigate = useNavigate();",
-      "",
-      "const ${1:openPosts} = async () => {",
-      "  await navigate({ to: '${2:/posts}' });",
-      "  $0",
-      "};"
-    ],
-    "description": "Navigate programmatically; the returned promise resolves once the navigation settles. Requires useNavigate from @tanstack/react-router.\n\n以编程方式导航，返回的 promise 在导航完成后 resolve；需要 @tanstack/react-router 的 useNavigate。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router useNavigate with params": {
-    "prefix": "navigateParams",
-    "body": [
-      "const navigate = useNavigate();",
-      "",
-      "const ${1:openPost} = async (${2:id}) => {",
-      "  await navigate({",
-      "    to: '${3:/posts}/\\$${4:postId}',",
-      "    params: { ${4}: ${2} },",
-      "  });",
-      "  $0",
-      "};"
-    ],
-    "description": "Navigate to a route with a dynamic segment. Requires useNavigate from @tanstack/react-router.\n\n导航到带动态段的路由；需要 @tanstack/react-router 的 useNavigate。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router Navigate": {
-    "prefix": [
-      "Navigate",
-      "rn"
-    ],
-    "body": [
-      "<Navigate to=\"${1:/login}\" replace />",
-      "$0"
-    ],
-    "description": "Navigate on render. Prefer a redirect thrown from beforeLoad — it runs before the component mounts. Requires Navigate from @tanstack/react-router.\n\n渲染时导航；更推荐在 beforeLoad 中抛出 redirect，它在组件挂载前就会执行；需要 @tanstack/react-router 的 Navigate。",
-    "scope": "javascriptreact,typescriptreact"
-  },
-  "TanStack Router redirect": {
-    "prefix": [
-      "redirect",
-      "rr"
-    ],
-    "body": [
-      "throw redirect({",
-      "  to: '${1:/login}',",
-      "  search: { redirect: ${2:location.href} },",
-      "});",
-      "$0"
-    ],
-    "description": "Redirect from beforeLoad or a loader by throwing. Carrying the current href in search lets the target send the visitor back. Requires redirect from @tanstack/react-router.\n\n在 beforeLoad 或 loader 中通过抛出实现重定向；把当前 href 带在 search 里，目标页便可将访问者送回；需要 @tanstack/react-router 的 redirect。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router useBlocker": {
-    "prefix": [
-      "useBlocker",
-      "rub"
-    ],
-    "body": [
-      "const { status, proceed, reset } = useBlocker({",
-      "  shouldBlockFn: () => ${1:isDirty},",
-      "  withResolver: true,",
-      "});",
-      "$0"
-    ],
-    "description": "Block navigation while a condition holds and resolve it yourself; render a confirmation when status is 'blocked', then call proceed or reset. Requires useBlocker from @tanstack/react-router.\n\n在条件成立时拦截导航并自行决定去留：status 为 'blocked' 时渲染确认界面，再调用 proceed 或 reset；需要 @tanstack/react-router 的 useBlocker。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router useRouterState pending": {
-    "prefix": [
-      "useRouterState",
-      "rurs"
-    ],
-    "body": [
-      "const ${1:isNavigating} = useRouterState({",
-      "  select: (state) => state.status === 'pending',",
-      "});",
-      "$0"
-    ],
-    "description": "Read router state with a selector so the component only re-renders when the selected value changes. Requires useRouterState from @tanstack/react-router.\n\n通过 selector 读取 router 状态，仅在所选值变化时重渲染；需要 @tanstack/react-router 的 useRouterState。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router useCanGoBack": {
-    "prefix": "useCanGoBack",
-    "body": [
-      "const router = useRouter();",
-      "const canGoBack = useCanGoBack();",
-      "",
-      "const ${1:goBack} = () => {",
-      "  if (canGoBack) {",
-      "    router.history.back();",
-      "    return;",
-      "  }",
-      "",
-      "  $0",
-      "};"
-    ],
-    "description": "Go back only when this application produced the previous entry, and fall back to a known route otherwise. Requires useRouter and useCanGoBack from @tanstack/react-router.\n\n仅当上一条历史记录由本应用产生时才后退，否则回退到已知路由；需要 @tanstack/react-router 的 useRouter 与 useCanGoBack。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  }
+	"TanStack Router useNavigate": {
+		"prefix": ["useNavigate", "run"],
+		"body": [
+			"const navigate = useNavigate();",
+			"",
+			"const ${1:openPosts} = async () => {",
+			"  await navigate({ to: '${2:/posts}' });",
+			"  $0",
+			"};"
+		],
+		"description": "Navigate programmatically; the returned promise resolves once the navigation settles. Requires useNavigate from @tanstack/react-router.\n\n以编程方式导航，返回的 promise 在导航完成后 resolve；需要 @tanstack/react-router 的 useNavigate。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router useNavigate with params": {
+		"prefix": "navigateParams",
+		"body": [
+			"const navigate = useNavigate();",
+			"",
+			"const ${1:openPost} = async (${2:id}) => {",
+			"  await navigate({",
+			"    to: '${3:/posts}/\\$${4:postId}',",
+			"    params: { ${4}: ${2} },",
+			"  });",
+			"  $0",
+			"};"
+		],
+		"description": "Navigate to a route with a dynamic segment. Requires useNavigate from @tanstack/react-router.\n\n导航到带动态段的路由；需要 @tanstack/react-router 的 useNavigate。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router Navigate": {
+		"prefix": ["Navigate", "rn"],
+		"body": ["<Navigate to=\"${1:/login}\" replace />", "$0"],
+		"description": "Navigate on render. Prefer a redirect thrown from beforeLoad — it runs before the component mounts. Requires Navigate from @tanstack/react-router.\n\n渲染时导航；更推荐在 beforeLoad 中抛出 redirect，它在组件挂载前就会执行；需要 @tanstack/react-router 的 Navigate。",
+		"scope": "javascriptreact,typescriptreact"
+	},
+	"TanStack Router redirect": {
+		"prefix": ["redirect", "rr"],
+		"body": ["throw redirect({", "  to: '${1:/login}',", "  search: { redirect: ${2:location.href} },", "});", "$0"],
+		"description": "Redirect from beforeLoad or a loader by throwing. Carrying the current href in search lets the target send the visitor back. Requires redirect from @tanstack/react-router.\n\n在 beforeLoad 或 loader 中通过抛出实现重定向；把当前 href 带在 search 里，目标页便可将访问者送回；需要 @tanstack/react-router 的 redirect。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router useBlocker": {
+		"prefix": ["useBlocker", "rub"],
+		"body": [
+			"const { status, proceed, reset } = useBlocker({",
+			"  shouldBlockFn: () => ${1:isDirty},",
+			"  withResolver: true,",
+			"});",
+			"$0"
+		],
+		"description": "Block navigation while a condition holds and resolve it yourself; render a confirmation when status is 'blocked', then call proceed or reset. Requires useBlocker from @tanstack/react-router.\n\n在条件成立时拦截导航并自行决定去留：status 为 'blocked' 时渲染确认界面，再调用 proceed 或 reset；需要 @tanstack/react-router 的 useBlocker。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router useRouterState pending": {
+		"prefix": ["useRouterState", "rurs"],
+		"body": [
+			"const ${1:isNavigating} = useRouterState({",
+			"  select: (state) => state.status === 'pending',",
+			"});",
+			"$0"
+		],
+		"description": "Read router state with a selector so the component only re-renders when the selected value changes. Requires useRouterState from @tanstack/react-router.\n\n通过 selector 读取 router 状态，仅在所选值变化时重渲染；需要 @tanstack/react-router 的 useRouterState。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router useCanGoBack": {
+		"prefix": "useCanGoBack",
+		"body": [
+			"const router = useRouter();",
+			"const canGoBack = useCanGoBack();",
+			"",
+			"const ${1:goBack} = () => {",
+			"  if (canGoBack) {",
+			"    router.history.back();",
+			"    return;",
+			"  }",
+			"",
+			"  $0",
+			"};"
+		],
+		"description": "Go back only when this application produced the previous entry, and fall back to a known route otherwise. Requires useRouter and useCanGoBack from @tanstack/react-router.\n\n仅当上一条历史记录由本应用产生时才后退，否则回退到已知路由；需要 @tanstack/react-router 的 useRouter 与 useCanGoBack。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	}
 }

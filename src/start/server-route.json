@@ -1,57 +1,54 @@
 {
-  "TanStack Start server route handlers": {
-    "prefix": [
-      "startServerRoute",
-      "rssr"
-    ],
-    "body": [
-      "export const Route = createFileRoute('${1:/api/posts}')({",
-      "  server: {",
-      "    handlers: {",
-      "      GET: async ({ request }) => {",
-      "        $0",
-      "        return Response.json(${2:posts});",
-      "      },",
-      "    },",
-      "  },",
-      "});"
-    ],
-    "description": "Answer HTTP requests from a route file. Requires createFileRoute from @tanstack/react-router and a TanStack Start server build.\n\n在路由文件中直接响应 HTTP 请求；需要 @tanstack/react-router 的 createFileRoute，以及 TanStack Start 的服务端构建。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Start server route with params": {
-    "prefix": "startServerRouteParams",
-    "body": [
-      "export const Route = createFileRoute('${1:/api/posts}/\\$${2:postId}')({",
-      "  server: {",
-      "    handlers: {",
-      "      GET: async ({ params }) => {",
-      "        const ${3:post} = await ${4:fetchPost}(params.${2});",
-      "        $0",
-      "        return Response.json(${3});",
-      "      },",
-      "      DELETE: async ({ params }) => {",
-      "        await ${5:deletePost}(params.${2});",
-      "        return new Response(null, { status: 204 });",
-      "      },",
-      "    },",
-      "  },",
-      "});"
-    ],
-    "description": "Answer several HTTP methods for one path, reading its dynamic segment from params. Requires createFileRoute from @tanstack/react-router and a TanStack Start server build.\n\n为同一路径响应多种 HTTP 方法，并从 params 读取动态段；需要 @tanstack/react-router 的 createFileRoute，以及 TanStack Start 的服务端构建。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Start server entry": {
-    "prefix": "createServerEntry",
-    "body": [
-      "export default createServerEntry({",
-      "  fetch(request) {",
-      "    $0",
-      "    return handler.fetch(request);",
-      "  },",
-      "});"
-    ],
-    "description": "Own the server entry so every request can be inspected before the default handler runs. Requires the default export and createServerEntry from @tanstack/react-start/server-entry.\n\n接管服务端入口，使每个请求在交给默认 handler 前都可被检视；需要 @tanstack/react-start/server-entry 的默认导出与 createServerEntry。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  }
+	"TanStack Start server route handlers": {
+		"prefix": ["startServerRoute", "rssr"],
+		"body": [
+			"export const Route = createFileRoute('${1:/api/posts}')({",
+			"  server: {",
+			"    handlers: {",
+			"      GET: async ({ request }) => {",
+			"        $0",
+			"        return Response.json(${2:posts});",
+			"      },",
+			"    },",
+			"  },",
+			"});"
+		],
+		"description": "Answer HTTP requests from a route file. Requires createFileRoute from @tanstack/react-router and a TanStack Start server build.\n\n在路由文件中直接响应 HTTP 请求；需要 @tanstack/react-router 的 createFileRoute，以及 TanStack Start 的服务端构建。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Start server route with params": {
+		"prefix": "startServerRouteParams",
+		"body": [
+			"export const Route = createFileRoute('${1:/api/posts}/\\$${2:postId}')({",
+			"  server: {",
+			"    handlers: {",
+			"      GET: async ({ params }) => {",
+			"        const ${3:post} = await ${4:fetchPost}(params.${2});",
+			"        $0",
+			"        return Response.json(${3});",
+			"      },",
+			"      DELETE: async ({ params }) => {",
+			"        await ${5:deletePost}(params.${2});",
+			"        return new Response(null, { status: 204 });",
+			"      },",
+			"    },",
+			"  },",
+			"});"
+		],
+		"description": "Answer several HTTP methods for one path, reading its dynamic segment from params. Requires createFileRoute from @tanstack/react-router and a TanStack Start server build.\n\n为同一路径响应多种 HTTP 方法，并从 params 读取动态段；需要 @tanstack/react-router 的 createFileRoute，以及 TanStack Start 的服务端构建。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Start server entry": {
+		"prefix": "createServerEntry",
+		"body": [
+			"export default createServerEntry({",
+			"  fetch(request) {",
+			"    $0",
+			"    return handler.fetch(request);",
+			"  },",
+			"});"
+		],
+		"description": "Own the server entry so every request can be inspected before the default handler runs. Requires the default export and createServerEntry from @tanstack/react-start/server-entry.\n\n接管服务端入口，使每个请求在交给默认 handler 前都可被检视；需要 @tanstack/react-start/server-entry 的默认导出与 createServerEntry。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	}
 }

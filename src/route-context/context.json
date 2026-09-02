@@ -1,46 +1,37 @@
 {
-  "TanStack Router context in beforeLoad": {
-    "prefix": [
-      "routeContext",
-      "rc"
-    ],
-    "body": [
-      "beforeLoad: async ({ context }) => {",
-      "  return { ${1:user}: await context.${2:auth}.getUser() };",
-      "},",
-      "$0"
-    ],
-    "description": "Add a value to the context every child route and loader receives; what beforeLoad returns is merged into the inherited context. Insert as a route option inside createFileRoute.\n\n向所有子路由与 loader 可见的 context 中补充值，beforeLoad 的返回值会并入继承来的 context；作为 createFileRoute 的路由选项插入。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router useRouteContext": {
-    "prefix": [
-      "useRouteContext",
-      "rurc"
-    ],
-    "body": [
-      "const ${1:user} = Route.useRouteContext({ select: (context) => context.${1} });",
-      "$0"
-    ],
-    "description": "Read one value out of the route context. Requires the Route exported by the route module.\n\n从路由 context 中读取单个值；需要该路由模块导出的 Route。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router runtime context (TypeScript)": {
-    "prefix": "routerRuntimeContext",
-    "body": [
-      "const router = createRouter({",
-      "  routeTree,",
-      "  context: { ${1:auth}: undefined! },",
-      "});",
-      "",
-      "function ${2:InnerApp}() {",
-      "  const ${1} = ${3:useAuth}();",
-      "",
-      "  return <RouterProvider router={router} context={{ ${1} }} />;",
-      "}",
-      "$0"
-    ],
-    "description": "Declare a context value at router creation and supply it at render, for anything that only exists once React is running. Requires createRouter and RouterProvider from @tanstack/react-router.\n\n在创建 router 时声明 context 项、在渲染时再注入，适用于只有 React 运行后才存在的值；需要 @tanstack/react-router 的 createRouter 与 RouterProvider。",
-    "scope": "typescriptreact"
-  }
+	"TanStack Router context in beforeLoad": {
+		"prefix": ["routeContext", "rc"],
+		"body": [
+			"beforeLoad: async ({ context }) => {",
+			"  return { ${1:user}: await context.${2:auth}.getUser() };",
+			"},",
+			"$0"
+		],
+		"description": "Add a value to the context every child route and loader receives; what beforeLoad returns is merged into the inherited context. Insert as a route option inside createFileRoute.\n\n向所有子路由与 loader 可见的 context 中补充值，beforeLoad 的返回值会并入继承来的 context；作为 createFileRoute 的路由选项插入。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router useRouteContext": {
+		"prefix": ["useRouteContext", "rurc"],
+		"body": ["const ${1:user} = Route.useRouteContext({ select: (context) => context.${1} });", "$0"],
+		"description": "Read one value out of the route context. Requires the Route exported by the route module.\n\n从路由 context 中读取单个值；需要该路由模块导出的 Route。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router runtime context (TypeScript)": {
+		"prefix": "routerRuntimeContext",
+		"body": [
+			"const router = createRouter({",
+			"  routeTree,",
+			"  context: { ${1:auth}: undefined! },",
+			"});",
+			"",
+			"function ${2:InnerApp}() {",
+			"  const ${1} = ${3:useAuth}();",
+			"",
+			"  return <RouterProvider router={router} context={{ ${1} }} />;",
+			"}",
+			"$0"
+		],
+		"description": "Declare a context value at router creation and supply it at render, for anything that only exists once React is running. Requires createRouter and RouterProvider from @tanstack/react-router.\n\n在创建 router 时声明 context 项、在渲染时再注入，适用于只有 React 运行后才存在的值；需要 @tanstack/react-router 的 createRouter 与 RouterProvider。",
+		"scope": "typescriptreact"
+	}
 }

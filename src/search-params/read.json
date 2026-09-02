@@ -1,58 +1,43 @@
 {
-  "TanStack Router useSearch from route": {
-    "prefix": [
-      "useSearch",
-      "rus"
-    ],
-    "body": [
-      "const { ${1:page} } = Route.useSearch();",
-      "$0"
-    ],
-    "description": "Read this route's validated search params inside its own component. Requires the Route exported by the route module.\n\n在路由自身的组件中读取已校验的 search 参数；需要该路由模块导出的 Route。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router useSearch by route id": {
-    "prefix": [
-      "useSearch",
-      "rus"
-    ],
-    "body": [
-      "const { ${1:page} } = useSearch({ from: '${2:/shop/products}' });",
-      "$0"
-    ],
-    "description": "Read a route's search params from a component that lives outside that route module. Requires useSearch from @tanstack/react-router.\n\n在路由模块之外的组件中读取某个路由的 search 参数；需要 @tanstack/react-router 的 useSearch。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router useSearch with select": {
-    "prefix": "useSearchSelect",
-    "body": [
-      "const ${1:page} = Route.useSearch({ select: (search) => search.${1} });",
-      "$0"
-    ],
-    "description": "Subscribe to one search field so the component re-renders only when that field changes. Requires the Route exported by the route module.\n\n只订阅一个 search 字段，组件仅在该字段变化时重渲染；需要该路由模块导出的 Route。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router search updater on Link": {
-    "prefix": "searchUpdater",
-    "body": [
-      "<Link to=\".\" search={(previous) => ({ ...previous, ${1:page}: ${2:previous.page + 1} })}>",
-      "  $0",
-      "</Link>"
-    ],
-    "description": "Update one search param while keeping the rest, staying on the current route. Requires Link from @tanstack/react-router.\n\n停留在当前路由，更新单个 search 参数并保留其余参数；需要 @tanstack/react-router 的 Link。",
-    "scope": "javascriptreact,typescriptreact"
-  },
-  "TanStack Router navigate with search updater": {
-    "prefix": "navigateSearch",
-    "body": [
-      "const navigate = Route.useNavigate();",
-      "",
-      "const ${1:setPage} = async (${2:page}) => {",
-      "  await navigate({ search: (previous) => ({ ...previous, ${2} }) });",
-      "  $0",
-      "};"
-    ],
-    "description": "Change search params programmatically without leaving the route; the route's own navigate keeps the search type. Requires the Route exported by the route module.\n\n不离开当前路由，以编程方式修改 search 参数；路由自身的 navigate 保留 search 的类型；需要该路由模块导出的 Route。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  }
+	"TanStack Router useSearch from route": {
+		"prefix": ["useSearch", "rus"],
+		"body": ["const { ${1:page} } = Route.useSearch();", "$0"],
+		"description": "Read this route's validated search params inside its own component. Requires the Route exported by the route module.\n\n在路由自身的组件中读取已校验的 search 参数；需要该路由模块导出的 Route。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router useSearch by route id": {
+		"prefix": ["useSearch", "rus"],
+		"body": ["const { ${1:page} } = useSearch({ from: '${2:/shop/products}' });", "$0"],
+		"description": "Read a route's search params from a component that lives outside that route module. Requires useSearch from @tanstack/react-router.\n\n在路由模块之外的组件中读取某个路由的 search 参数；需要 @tanstack/react-router 的 useSearch。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router useSearch with select": {
+		"prefix": "useSearchSelect",
+		"body": ["const ${1:page} = Route.useSearch({ select: (search) => search.${1} });", "$0"],
+		"description": "Subscribe to one search field so the component re-renders only when that field changes. Requires the Route exported by the route module.\n\n只订阅一个 search 字段，组件仅在该字段变化时重渲染；需要该路由模块导出的 Route。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router search updater on Link": {
+		"prefix": "searchUpdater",
+		"body": [
+			"<Link to=\".\" search={(previous) => ({ ...previous, ${1:page}: ${2:previous.page + 1} })}>",
+			"  $0",
+			"</Link>"
+		],
+		"description": "Update one search param while keeping the rest, staying on the current route. Requires Link from @tanstack/react-router.\n\n停留在当前路由，更新单个 search 参数并保留其余参数；需要 @tanstack/react-router 的 Link。",
+		"scope": "javascriptreact,typescriptreact"
+	},
+	"TanStack Router navigate with search updater": {
+		"prefix": "navigateSearch",
+		"body": [
+			"const navigate = Route.useNavigate();",
+			"",
+			"const ${1:setPage} = async (${2:page}) => {",
+			"  await navigate({ search: (previous) => ({ ...previous, ${2} }) });",
+			"  $0",
+			"};"
+		],
+		"description": "Change search params programmatically without leaving the route; the route's own navigate keeps the search type. Requires the Route exported by the route module.\n\n不离开当前路由，以编程方式修改 search 参数；路由自身的 navigate 保留 search 的类型；需要该路由模块导出的 Route。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	}
 }

@@ -1,76 +1,73 @@
 {
-  "TanStack Router root route": {
-    "prefix": [
-      "createRootRoute",
-      "rcrr"
-    ],
-    "body": [
-      "export const Route = createRootRoute({",
-      "  component: ${1:RootLayout},",
-      "});",
-      "",
-      "function ${1}() {",
-      "  return (",
-      "    <>",
-      "      $0",
-      "      <Outlet />",
-      "    </>",
-      "  );",
-      "}"
-    ],
-    "description": "Declare the root route in src/routes/__root.tsx. Requires createRootRoute and Outlet from @tanstack/react-router.\n\n在 src/routes/__root.tsx 中声明根路由；需要 @tanstack/react-router 的 createRootRoute 与 Outlet。",
-    "scope": "javascriptreact,typescriptreact"
-  },
-  "TanStack Router root route with context": {
-    "prefix": "createRootRouteWithContext",
-    "body": [
-      "export const Route = createRootRouteWithContext<{",
-      "  ${1:queryClient}: ${2:QueryClient};",
-      "}>()({",
-      "  component: ${3:RootLayout},",
-      "});",
-      "",
-      "function ${3}() {",
-      "  return (",
-      "    <>",
-      "      $0",
-      "      <Outlet />",
-      "    </>",
-      "  );",
-      "}"
-    ],
-    "description": "Declare a root route that types the router context every route inherits. The same shape must be passed to createRouter as its context option. Requires createRootRouteWithContext and Outlet from @tanstack/react-router.\n\n声明带类型化 router context 的根路由，该 context 为所有路由继承；同样的形状必须作为 createRouter 的 context 传入；需要 @tanstack/react-router 的 createRootRouteWithContext 与 Outlet。",
-    "scope": "typescriptreact"
-  },
-  "TanStack Router root document (TypeScript)": {
-    "prefix": "rootDocument",
-    "isFileTemplate": true,
-    "body": [
-      "import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router';",
-      "",
-      "export const Route = createRootRoute({",
-      "  head: () => ({",
-      "    meta: [{ title: '${1:Application}' }],",
-      "  }),",
-      "  component: RootDocument,",
-      "});",
-      "",
-      "function RootDocument() {",
-      "  return (",
-      "    <html lang=\"${2:en}\">",
-      "      <head>",
-      "        <HeadContent />",
-      "      </head>",
-      "      <body>",
-      "        $0",
-      "        <Outlet />",
-      "        <Scripts />",
-      "      </body>",
-      "    </html>",
-      "  );",
-      "}"
-    ],
-    "description": "Complete server-rendered root route that owns the HTML document. Requires @tanstack/react-router and a server-rendering setup such as TanStack Start.\n\n完整的服务端渲染根路由，负责整份 HTML 文档；需要 @tanstack/react-router，以及 TanStack Start 一类的服务端渲染配置。",
-    "scope": "typescriptreact"
-  }
+	"TanStack Router root route": {
+		"prefix": ["createRootRoute", "rcrr"],
+		"body": [
+			"export const Route = createRootRoute({",
+			"  component: ${1:RootLayout},",
+			"});",
+			"",
+			"function ${1}() {",
+			"  return (",
+			"    <>",
+			"      $0",
+			"      <Outlet />",
+			"    </>",
+			"  );",
+			"}"
+		],
+		"description": "Declare the root route in src/routes/__root.tsx. Requires createRootRoute and Outlet from @tanstack/react-router.\n\n在 src/routes/__root.tsx 中声明根路由；需要 @tanstack/react-router 的 createRootRoute 与 Outlet。",
+		"scope": "javascriptreact,typescriptreact"
+	},
+	"TanStack Router root route with context": {
+		"prefix": "createRootRouteWithContext",
+		"body": [
+			"export const Route = createRootRouteWithContext<{",
+			"  ${1:queryClient}: ${2:QueryClient};",
+			"}>()({",
+			"  component: ${3:RootLayout},",
+			"});",
+			"",
+			"function ${3}() {",
+			"  return (",
+			"    <>",
+			"      $0",
+			"      <Outlet />",
+			"    </>",
+			"  );",
+			"}"
+		],
+		"description": "Declare a root route that types the router context every route inherits. The same shape must be passed to createRouter as its context option. Requires createRootRouteWithContext and Outlet from @tanstack/react-router.\n\n声明带类型化 router context 的根路由，该 context 为所有路由继承；同样的形状必须作为 createRouter 的 context 传入；需要 @tanstack/react-router 的 createRootRouteWithContext 与 Outlet。",
+		"scope": "typescriptreact"
+	},
+	"TanStack Router root document (TypeScript)": {
+		"prefix": "rootDocument",
+		"isFileTemplate": true,
+		"body": [
+			"import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router';",
+			"",
+			"export const Route = createRootRoute({",
+			"  head: () => ({",
+			"    meta: [{ title: '${1:Application}' }],",
+			"  }),",
+			"  component: RootDocument,",
+			"});",
+			"",
+			"function RootDocument() {",
+			"  return (",
+			"    <html lang=\"${2:en}\">",
+			"      <head>",
+			"        <HeadContent />",
+			"      </head>",
+			"      <body>",
+			"        $0",
+			"        <Outlet />",
+			"        <Scripts />",
+			"      </body>",
+			"    </html>",
+			"  );",
+			"}"
+		],
+		"description": "Complete server-rendered root route that owns the HTML document. Requires @tanstack/react-router and a server-rendering setup such as TanStack Start.\n\n完整的服务端渲染根路由，负责整份 HTML 文档；需要 @tanstack/react-router，以及 TanStack Start 一类的服务端渲染配置。",
+		"scope": "typescriptreact"
+	}
 }

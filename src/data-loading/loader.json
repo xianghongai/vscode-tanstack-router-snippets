@@ -1,117 +1,90 @@
 {
-  "TanStack Router route loader": {
-    "prefix": [
-      "routeLoader",
-      "rrl"
-    ],
-    "body": [
-      "loader: async ({ params, abortController }) => {",
-      "  return ${1:fetchPost}(params.${2:postId}, { signal: abortController.signal });",
-      "},",
-      "$0"
-    ],
-    "description": "Load a route's data before its component renders; the abort signal is cancelled when the navigation is. Insert as a route option inside createFileRoute.\n\n在路由组件渲染前加载数据，导航被取消时该 signal 一并中止；作为 createFileRoute 的路由选项插入。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router loaderDeps": {
-    "prefix": [
-      "loaderDeps",
-      "rld"
-    ],
-    "body": [
-      "loaderDeps: ({ search }) => ({ ${1:page}: search.${1} }),",
-      "loader: ({ deps }) => ${2:fetchPosts}(deps.${1}),",
-      "$0"
-    ],
-    "description": "Make a loader depend on search params. Without loaderDeps a loader is not re-run when only the search changes. Insert as route options inside createFileRoute.\n\n让 loader 依赖 search 参数；不声明 loaderDeps 时，仅 search 变化不会重新执行 loader；作为 createFileRoute 的路由选项插入。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router loader caching options": {
-    "prefix": "loaderStaleTime",
-    "body": [
-      "staleTime: ${1:30_000},",
-      "gcTime: ${2:300_000},",
-      "shouldReload: ${3:false},",
-      "$0"
-    ],
-    "description": "Control how long a loader's result is reused and how long it is kept after the route unmounts. Insert as route options inside createFileRoute.\n\n控制 loader 结果的复用时长，以及路由卸载后的保留时长；作为 createFileRoute 的路由选项插入。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router beforeLoad": {
-    "prefix": [
-      "beforeLoad",
-      "rbl"
-    ],
-    "body": [
-      "beforeLoad: async ({ context, location }) => {",
-      "  $0",
-      "},"
-    ],
-    "description": "Run before the loader and before any child route resolves; the right place to guard a route or to add to its context. Insert as a route option inside createFileRoute.\n\n在 loader 与任何子路由解析之前执行，是守卫路由或补充 context 的位置；作为 createFileRoute 的路由选项插入。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router useLoaderData": {
-    "prefix": [
-      "useLoaderData",
-      "ruld"
-    ],
-    "body": [
-      "const ${1:post} = Route.useLoaderData();",
-      "$0"
-    ],
-    "description": "Read this route's loader result inside its own component. Requires the Route exported by the route module.\n\n在路由自身的组件中读取 loader 结果；需要该路由模块导出的 Route。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router useLoaderDeps": {
-    "prefix": "useLoaderDeps",
-    "body": [
-      "const { ${1:page} } = Route.useLoaderDeps();",
-      "$0"
-    ],
-    "description": "Read the dependencies the current loader run was keyed by. Requires the Route exported by the route module.\n\n读取本次 loader 运行所依据的依赖项；需要该路由模块导出的 Route。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router invalidate": {
-    "prefix": "routerInvalidate",
-    "body": [
-      "const router = useRouter();",
-      "",
-      "const ${1:refresh} = async () => {",
-      "  await router.invalidate();",
-      "  $0",
-      "};"
-    ],
-    "description": "Re-run the loaders of every matched route, for instance after a mutation succeeds. Requires useRouter from @tanstack/react-router.\n\n重新执行所有已匹配路由的 loader，例如在一次修改成功之后；需要 @tanstack/react-router 的 useRouter。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router deferred loader": {
-    "prefix": "loaderDeferred",
-    "body": [
-      "loader: async () => {",
-      "  return {",
-      "    ${1:post}: await ${2:fetchPost}(),",
-      "    ${3:comments}: ${4:fetchComments}(),",
-      "  };",
-      "},",
-      "$0"
-    ],
-    "description": "Await only what the first paint needs and hand the slower promise to the component. Insert as a route option inside createFileRoute.\n\n只 await 首屏所需的数据，把较慢的 promise 直接交给组件；作为 createFileRoute 的路由选项插入。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router Await deferred": {
-    "prefix": "Await",
-    "body": [
-      "<Suspense fallback={<p>Loading…</p>}>",
-      "  <Await promise={${1:comments}}>",
-      "    {(${2:data}) => (",
-      "      <ul>",
-      "        $0",
-      "      </ul>",
-      "    )}",
-      "  </Await>",
-      "</Suspense>"
-    ],
-    "description": "Render a promise returned by a loader once it settles. Requires Await from @tanstack/react-router and Suspense from react.\n\n在 loader 返回的 promise 完成后渲染其结果；需要 @tanstack/react-router 的 Await 与 react 的 Suspense。",
-    "scope": "javascriptreact,typescriptreact"
-  }
+	"TanStack Router route loader": {
+		"prefix": ["routeLoader", "rrl"],
+		"body": [
+			"loader: async ({ params, abortController }) => {",
+			"  return ${1:fetchPost}(params.${2:postId}, { signal: abortController.signal });",
+			"},",
+			"$0"
+		],
+		"description": "Load a route's data before its component renders; the abort signal is cancelled when the navigation is. Insert as a route option inside createFileRoute.\n\n在路由组件渲染前加载数据，导航被取消时该 signal 一并中止；作为 createFileRoute 的路由选项插入。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router loaderDeps": {
+		"prefix": ["loaderDeps", "rld"],
+		"body": [
+			"loaderDeps: ({ search }) => ({ ${1:page}: search.${1} }),",
+			"loader: ({ deps }) => ${2:fetchPosts}(deps.${1}),",
+			"$0"
+		],
+		"description": "Make a loader depend on search params. Without loaderDeps a loader is not re-run when only the search changes. Insert as route options inside createFileRoute.\n\n让 loader 依赖 search 参数；不声明 loaderDeps 时，仅 search 变化不会重新执行 loader；作为 createFileRoute 的路由选项插入。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router loader caching options": {
+		"prefix": "loaderStaleTime",
+		"body": ["staleTime: ${1:30_000},", "gcTime: ${2:300_000},", "shouldReload: ${3:false},", "$0"],
+		"description": "Control how long a loader's result is reused and how long it is kept after the route unmounts. Insert as route options inside createFileRoute.\n\n控制 loader 结果的复用时长，以及路由卸载后的保留时长；作为 createFileRoute 的路由选项插入。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router beforeLoad": {
+		"prefix": ["beforeLoad", "rbl"],
+		"body": ["beforeLoad: async ({ context, location }) => {", "  $0", "},"],
+		"description": "Run before the loader and before any child route resolves; the right place to guard a route or to add to its context. Insert as a route option inside createFileRoute.\n\n在 loader 与任何子路由解析之前执行，是守卫路由或补充 context 的位置；作为 createFileRoute 的路由选项插入。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router useLoaderData": {
+		"prefix": ["useLoaderData", "ruld"],
+		"body": ["const ${1:post} = Route.useLoaderData();", "$0"],
+		"description": "Read this route's loader result inside its own component. Requires the Route exported by the route module.\n\n在路由自身的组件中读取 loader 结果；需要该路由模块导出的 Route。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router useLoaderDeps": {
+		"prefix": "useLoaderDeps",
+		"body": ["const { ${1:page} } = Route.useLoaderDeps();", "$0"],
+		"description": "Read the dependencies the current loader run was keyed by. Requires the Route exported by the route module.\n\n读取本次 loader 运行所依据的依赖项；需要该路由模块导出的 Route。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router invalidate": {
+		"prefix": "routerInvalidate",
+		"body": [
+			"const router = useRouter();",
+			"",
+			"const ${1:refresh} = async () => {",
+			"  await router.invalidate();",
+			"  $0",
+			"};"
+		],
+		"description": "Re-run the loaders of every matched route, for instance after a mutation succeeds. Requires useRouter from @tanstack/react-router.\n\n重新执行所有已匹配路由的 loader，例如在一次修改成功之后；需要 @tanstack/react-router 的 useRouter。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router deferred loader": {
+		"prefix": "loaderDeferred",
+		"body": [
+			"loader: async () => {",
+			"  return {",
+			"    ${1:post}: await ${2:fetchPost}(),",
+			"    ${3:comments}: ${4:fetchComments}(),",
+			"  };",
+			"},",
+			"$0"
+		],
+		"description": "Await only what the first paint needs and hand the slower promise to the component. Insert as a route option inside createFileRoute.\n\n只 await 首屏所需的数据，把较慢的 promise 直接交给组件；作为 createFileRoute 的路由选项插入。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router Await deferred": {
+		"prefix": "Await",
+		"body": [
+			"<Suspense fallback={<p>Loading…</p>}>",
+			"  <Await promise={${1:comments}}>",
+			"    {(${2:data}) => (",
+			"      <ul>",
+			"        $0",
+			"      </ul>",
+			"    )}",
+			"  </Await>",
+			"</Suspense>"
+		],
+		"description": "Render a promise returned by a loader once it settles. Requires Await from @tanstack/react-router and Suspense from react.\n\n在 loader 返回的 promise 完成后渲染其结果；需要 @tanstack/react-router 的 Await 与 react 的 Suspense。",
+		"scope": "javascriptreact,typescriptreact"
+	}
 }

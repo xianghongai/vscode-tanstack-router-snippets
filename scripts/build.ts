@@ -65,6 +65,8 @@ const snippets: Record<string, Snippet> = {};
 /** 名称 -> 首次定义它的文件，便于重名时同时指出冲突双方。 */
 const origin = new Map<string, string>();
 const collisions: string[] = [];
+/** 缺少 `scope` 的片段会对所有语言生效，多半是漏写而非本意。 */
+const unscoped: string[] = [];
 
 /** 每个来源文件贡献的片段数，构建成功后逐行列出。 */
 const contributions: Array<[file: string, count: number]> = [];
@@ -82,12 +84,22 @@ for (const file of files) {
       origin.set(name, file);
     }
 
+    if (!snippet.scope) {
+      unscoped.push(`  "${name}"\n    ${file}`);
+    }
+
     snippets[name] = snippet;
   }
 }
 
 if (collisions.length) {
   throw new Error(`Duplicate snippet name, these would be silently dropped:\n${collisions.join('\n')}`);
+}
+
+// 本仓库注册的是不带 `language` 的 `.code-snippets`，投放范围完全由 `scope` 决定；
+// 漏写会让该片段出现在 Markdown、JSON 等任何语言里。
+if (unscoped.length) {
+  throw new Error(`Missing "scope", these would apply to every language:\n${unscoped.join('\n')}`);
 }
 
 mkdirSync(dirname(output), { recursive: true });

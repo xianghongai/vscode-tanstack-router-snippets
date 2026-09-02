@@ -3,6 +3,8 @@ on:
     tags:
       - 'v*'
 
+  workflow_dispatch:
+
 name: Package VS Code Extension — GitHub Action
 run-name: 'Release: ${{ github.ref_name }}'
 
@@ -28,6 +30,9 @@ jobs:
 
       - name: Install the dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Format
+        run: pnpm run format:check
 
       - name: Lint
         run: pnpm run lint

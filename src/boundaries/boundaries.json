@@ -1,108 +1,93 @@
 {
-  "TanStack Router errorComponent (JavaScript)": {
-    "prefix": [
-      "errorComponent",
-      "rec"
-    ],
-    "body": [
-      "function ${1:PostErrorState}({ error, reset }) {",
-      "  return (",
-      "    <div role=\"alert\">",
-      "      <p>{error.message}</p>",
-      "      <button type=\"button\" onClick={reset}>",
-      "        ${2:Try again}",
-      "      </button>",
-      "      $0",
-      "    </div>",
-      "  );",
-      "}"
-    ],
-    "description": "Render a route's error state; reset clears the boundary so the loader runs again. Pass it as the route's errorComponent option.\n\n渲染路由的错误状态，reset 清除边界后 loader 会重新执行；作为路由的 errorComponent 选项传入。",
-    "scope": "javascriptreact"
-  },
-  "TanStack Router errorComponent (TypeScript)": {
-    "prefix": [
-      "errorComponent",
-      "rec"
-    ],
-    "body": [
-      "function ${1:PostErrorState}({ error, reset }: ErrorComponentProps) {",
-      "  return (",
-      "    <div role=\"alert\">",
-      "      <p>{error.message}</p>",
-      "      <button type=\"button\" onClick={reset}>",
-      "        ${2:Try again}",
-      "      </button>",
-      "      $0",
-      "    </div>",
-      "  );",
-      "}"
-    ],
-    "description": "Render a typed route error state; reset clears the boundary so the loader runs again. Requires the ErrorComponentProps type from @tanstack/react-router.\n\n渲染类型化的路由错误状态，reset 清除边界后 loader 会重新执行；需要 @tanstack/react-router 的 ErrorComponentProps 类型。",
-    "scope": "typescriptreact"
-  },
-  "TanStack Router pendingComponent": {
-    "prefix": [
-      "pendingComponent",
-      "rpc"
-    ],
-    "body": [
-      "pendingComponent: () => (",
-      "  <div>",
-      "    $0",
-      "  </div>",
-      "),",
-      "pendingMs: ${1:1000},",
-      "pendingMinMs: ${2:500},"
-    ],
-    "description": "Show a loading state once a navigation has been pending for pendingMs, holding it at least pendingMinMs so it does not flash. Insert as route options inside createFileRoute.\n\n导航等待超过 pendingMs 后展示加载状态，并至少保持 pendingMinMs 以避免闪烁；作为 createFileRoute 的路由选项插入。",
-    "scope": "javascriptreact,typescriptreact"
-  },
-  "TanStack Router notFoundComponent": {
-    "prefix": [
-      "notFoundComponent",
-      "rnfc"
-    ],
-    "body": [
-      "notFoundComponent: () => (",
-      "  <div>",
-      "    <p>${1:This page does not exist.}</p>",
-      "    $0",
-      "  </div>",
-      "),"
-    ],
-    "description": "Render this route's not-found state. Insert as a route option inside createFileRoute.\n\n渲染该路由的 not-found 状态；作为 createFileRoute 的路由选项插入。",
-    "scope": "javascriptreact,typescriptreact"
-  },
-  "TanStack Router notFound": {
-    "prefix": [
-      "notFound",
-      "rnf"
-    ],
-    "body": [
-      "loader: async ({ params }) => {",
-      "  const ${1:post} = await ${2:fetchPost}(params.${3:postId});",
-      "",
-      "  if (!${1}) {",
-      "    throw notFound();",
-      "  }",
-      "",
-      "  return ${1};",
-      "},",
-      "$0"
-    ],
-    "description": "Signal a missing resource from a loader; the nearest notFoundComponent renders. Pass routeId: rootRouteId to show the application-wide one instead. Requires notFound from @tanstack/react-router.\n\n在 loader 中表示资源不存在，由最近的 notFoundComponent 渲染；传 routeId: rootRouteId 则改由全局的那个渲染；需要 @tanstack/react-router 的 notFound。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  },
-  "TanStack Router route boundary options": {
-    "prefix": "routeBoundaries",
-    "body": [
-      "errorComponent: ${1:PostErrorState},",
-      "pendingComponent: ${2:PostPendingState},",
-      "notFoundComponent: ${3:PostNotFound},",
-      "$0"
-    ],
-    "description": "Attach the error, pending and not-found components of one route. Insert as route options inside createFileRoute.\n\n为单个路由挂上错误、等待与 not-found 组件；作为 createFileRoute 的路由选项插入。",
-    "scope": "javascript,javascriptreact,typescript,typescriptreact"
-  }
+	"TanStack Router errorComponent (JavaScript)": {
+		"prefix": ["errorComponent", "rec"],
+		"body": [
+			"function ${1:PostErrorState}({ error, reset }) {",
+			"  return (",
+			"    <div role=\"alert\">",
+			"      <p>{error.message}</p>",
+			"      <button type=\"button\" onClick={reset}>",
+			"        ${2:Try again}",
+			"      </button>",
+			"      $0",
+			"    </div>",
+			"  );",
+			"}"
+		],
+		"description": "Render a route's error state; reset clears the boundary so the loader runs again. Pass it as the route's errorComponent option.\n\n渲染路由的错误状态，reset 清除边界后 loader 会重新执行；作为路由的 errorComponent 选项传入。",
+		"scope": "javascriptreact"
+	},
+	"TanStack Router errorComponent (TypeScript)": {
+		"prefix": ["errorComponent", "rec"],
+		"body": [
+			"function ${1:PostErrorState}({ error, reset }: ErrorComponentProps) {",
+			"  return (",
+			"    <div role=\"alert\">",
+			"      <p>{error.message}</p>",
+			"      <button type=\"button\" onClick={reset}>",
+			"        ${2:Try again}",
+			"      </button>",
+			"      $0",
+			"    </div>",
+			"  );",
+			"}"
+		],
+		"description": "Render a typed route error state; reset clears the boundary so the loader runs again. Requires the ErrorComponentProps type from @tanstack/react-router.\n\n渲染类型化的路由错误状态，reset 清除边界后 loader 会重新执行；需要 @tanstack/react-router 的 ErrorComponentProps 类型。",
+		"scope": "typescriptreact"
+	},
+	"TanStack Router pendingComponent": {
+		"prefix": ["pendingComponent", "rpc"],
+		"body": [
+			"pendingComponent: () => (",
+			"  <div>",
+			"    $0",
+			"  </div>",
+			"),",
+			"pendingMs: ${1:1000},",
+			"pendingMinMs: ${2:500},"
+		],
+		"description": "Show a loading state once a navigation has been pending for pendingMs, holding it at least pendingMinMs so it does not flash. Insert as route options inside createFileRoute.\n\n导航等待超过 pendingMs 后展示加载状态，并至少保持 pendingMinMs 以避免闪烁；作为 createFileRoute 的路由选项插入。",
+		"scope": "javascriptreact,typescriptreact"
+	},
+	"TanStack Router notFoundComponent": {
+		"prefix": ["notFoundComponent", "rnfc"],
+		"body": [
+			"notFoundComponent: () => (",
+			"  <div>",
+			"    <p>${1:This page does not exist.}</p>",
+			"    $0",
+			"  </div>",
+			"),"
+		],
+		"description": "Render this route's not-found state. Insert as a route option inside createFileRoute.\n\n渲染该路由的 not-found 状态；作为 createFileRoute 的路由选项插入。",
+		"scope": "javascriptreact,typescriptreact"
+	},
+	"TanStack Router notFound": {
+		"prefix": ["notFound", "rnf"],
+		"body": [
+			"loader: async ({ params }) => {",
+			"  const ${1:post} = await ${2:fetchPost}(params.${3:postId});",
+			"",
+			"  if (!${1}) {",
+			"    throw notFound();",
+			"  }",
+			"",
+			"  return ${1};",
+			"},",
+			"$0"
+		],
+		"description": "Signal a missing resource from a loader; the nearest notFoundComponent renders. Pass routeId: rootRouteId to show the application-wide one instead. Requires notFound from @tanstack/react-router.\n\n在 loader 中表示资源不存在，由最近的 notFoundComponent 渲染；传 routeId: rootRouteId 则改由全局的那个渲染；需要 @tanstack/react-router 的 notFound。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	},
+	"TanStack Router route boundary options": {
+		"prefix": "routeBoundaries",
+		"body": [
+			"errorComponent: ${1:PostErrorState},",
+			"pendingComponent: ${2:PostPendingState},",
+			"notFoundComponent: ${3:PostNotFound},",
+			"$0"
+		],
+		"description": "Attach the error, pending and not-found components of one route. Insert as route options inside createFileRoute.\n\n为单个路由挂上错误、等待与 not-found 组件；作为 createFileRoute 的路由选项插入。",
+		"scope": "javascript,javascriptreact,typescript,typescriptreact"
+	}
 }
