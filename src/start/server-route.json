@@ -1,9 +1,6 @@
 {
   "TanStack Start server route handlers": {
-    "prefix": [
-      "startServerRoute",
-      "rssr"
-    ],
+    "prefix": ["startServerRoute", "rssr"],
     "body": [
       "export const Route = createFileRoute('${1:/api/posts}')({",
       "  server: {",

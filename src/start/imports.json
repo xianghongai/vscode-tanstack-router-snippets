@@ -1,10 +1,7 @@
 {
   "TanStack Start import": {
     "prefix": "startImport",
-    "body": [
-      "import { ${1:createServerFn} } from '@tanstack/react-start';",
-      "$0"
-    ],
+    "body": ["import { ${1:createServerFn} } from '@tanstack/react-start';", "$0"],
     "description": "Import a TanStack Start v1 API.\n\n导入 TanStack Start v1 API。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   }

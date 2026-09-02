@@ -1,9 +1,6 @@
 {
   "TanStack Router paginated list route (TypeScript)": {
-    "prefix": [
-      "routePagination",
-      "rrp"
-    ],
+    "prefix": ["routePagination", "rrp"],
     "isFileTemplate": true,
     "body": [
       "import { Link, createFileRoute } from '@tanstack/react-router';",

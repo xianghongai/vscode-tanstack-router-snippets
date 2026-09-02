@@ -1,9 +1,6 @@
 {
   "TanStack Router context in beforeLoad": {
-    "prefix": [
-      "routeContext",
-      "rc"
-    ],
+    "prefix": ["routeContext", "rc"],
     "body": [
       "beforeLoad: async ({ context }) => {",
       "  return { ${1:user}: await context.${2:auth}.getUser() };",
@@ -14,14 +11,8 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useRouteContext": {
-    "prefix": [
-      "useRouteContext",
-      "rurc"
-    ],
-    "body": [
-      "const ${1:user} = Route.useRouteContext({ select: (context) => context.${1} });",
-      "$0"
-    ],
+    "prefix": ["useRouteContext", "rurc"],
+    "body": ["const ${1:user} = Route.useRouteContext({ select: (context) => context.${1} });", "$0"],
     "description": "Read one value out of the route context. Requires the Route exported by the route module.\n\n从路由 context 中读取单个值；需要该路由模块导出的 Route。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },

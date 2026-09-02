@@ -1,33 +1,18 @@
 {
   "TanStack Router useParams from route": {
-    "prefix": [
-      "useParams",
-      "rup"
-    ],
-    "body": [
-      "const { ${1:postId} } = Route.useParams();",
-      "$0"
-    ],
+    "prefix": ["useParams", "rup"],
+    "body": ["const { ${1:postId} } = Route.useParams();", "$0"],
     "description": "Read this route's path params inside its own component. Requires the Route exported by the route module.\n\n在路由自身的组件中读取路径参数；需要该路由模块导出的 Route。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useParams by route id": {
-    "prefix": [
-      "useParams",
-      "rup"
-    ],
-    "body": [
-      "const { ${1:postId} } = useParams({ from: '${2:/posts}/\\$${1}' });",
-      "$0"
-    ],
+    "prefix": ["useParams", "rup"],
+    "body": ["const { ${1:postId} } = useParams({ from: '${2:/posts}/\\$${1}' });", "$0"],
     "description": "Read a route's path params from a component that lives outside that route module. Requires useParams from @tanstack/react-router.\n\n在路由模块之外的组件中读取某个路由的路径参数；需要 @tanstack/react-router 的 useParams。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router getRouteApi": {
-    "prefix": [
-      "getRouteApi",
-      "rgra"
-    ],
+    "prefix": ["getRouteApi", "rgra"],
     "body": [
       "const ${1:postRoute} = getRouteApi('${2:/posts}/\\$${3:postId}');",
       "",

@@ -1,45 +1,30 @@
 {
   "name": "vscode-tanstack-router-snippets",
   "displayName": "TanStack Router Snippets",
+  "version": "1.0.2",
   "description": "Snippets for TanStack Router: file routes, search params, loaders, router context, TanStack Start and Query integration. TanStack Router 高频片段。",
-  "version": "1.0.1",
-  "publisher": "NicholasHsiang",
-  "license": "MIT",
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/xianghongai/vscode-tanstack-router-snippets/issues"
-  },
-  "homepage": "https://github.com/xianghongai/vscode-tanstack-router-snippets/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/xianghongai/vscode-tanstack-router-snippets/blob/master/README.md"
-  },
-  "engines": {
-    "vscode": "^1.100.0"
-  },
   "categories": [
     "Snippets"
   ],
   "keywords": [
-    "tanstack-router",
-    "tanstack-start",
-    "tanstack-query",
     "react",
     "routing",
-    "snippets"
+    "snippets",
+    "tanstack-query",
+    "tanstack-router",
+    "tanstack-start"
   ],
-  "icon": "art/icon.png",
-  "galleryBanner": {
-    "color": "#0f172a",
-    "theme": "dark"
+  "homepage": "https://github.com/xianghongai/vscode-tanstack-router-snippets/",
+  "bugs": {
+    "url": "https://github.com/xianghongai/vscode-tanstack-router-snippets/issues"
   },
-  "contributes": {
-    "snippets": [
-      {
-        "path": "./snippets/index.code-snippets"
-      }
-    ]
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xianghongai/vscode-tanstack-router-snippets/blob/master/README.md"
   },
+  "publisher": "NicholasHsiang",
+  "type": "module",
   "scripts": {
     "build": "node scripts/build.ts",
     "clean": "rimraf --glob \"*.vsix\" snippets",
@@ -51,9 +36,7 @@
     "test": "vitest run",
     "vscode:prepublish": "pnpm run clean && pnpm run lint && pnpm run test && pnpm run build"
   },
-  "packageManager": "pnpm@11.24.0",
   "devDependencies": {
-    "@babel/parser": "8.0.4",
     "@tanstack/react-query": "^5.102.8",
     "@tanstack/react-router": "^1.170.32",
     "@tanstack/react-router-devtools": "^1.167.1",
@@ -72,5 +55,21 @@
     "rimraf": "^6.1.3",
     "vitest": "4.1.11",
     "zod": "^4.5.4"
-  }
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "path": "./snippets/index.code-snippets"
+      }
+    ]
+  },
+  "icon": "art/icon.png",
+  "galleryBanner": {
+    "color": "#0f172a",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "packageManager": "pnpm@11.24.0"
 }

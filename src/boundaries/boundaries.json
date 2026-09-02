@@ -1,9 +1,6 @@
 {
   "TanStack Router errorComponent (JavaScript)": {
-    "prefix": [
-      "errorComponent",
-      "rec"
-    ],
+    "prefix": ["errorComponent", "rec"],
     "body": [
       "function ${1:PostErrorState}({ error, reset }) {",
       "  return (",
@@ -21,10 +18,7 @@
     "scope": "javascriptreact"
   },
   "TanStack Router errorComponent (TypeScript)": {
-    "prefix": [
-      "errorComponent",
-      "rec"
-    ],
+    "prefix": ["errorComponent", "rec"],
     "body": [
       "function ${1:PostErrorState}({ error, reset }: ErrorComponentProps) {",
       "  return (",
@@ -42,10 +36,7 @@
     "scope": "typescriptreact"
   },
   "TanStack Router pendingComponent": {
-    "prefix": [
-      "pendingComponent",
-      "rpc"
-    ],
+    "prefix": ["pendingComponent", "rpc"],
     "body": [
       "pendingComponent: () => (",
       "  <div>",
@@ -59,10 +50,7 @@
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router notFoundComponent": {
-    "prefix": [
-      "notFoundComponent",
-      "rnfc"
-    ],
+    "prefix": ["notFoundComponent", "rnfc"],
     "body": [
       "notFoundComponent: () => (",
       "  <div>",
@@ -75,10 +63,7 @@
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router notFound": {
-    "prefix": [
-      "notFound",
-      "rnf"
-    ],
+    "prefix": ["notFound", "rnf"],
     "body": [
       "loader: async ({ params }) => {",
       "  const ${1:post} = await ${2:fetchPost}(params.${3:postId});",

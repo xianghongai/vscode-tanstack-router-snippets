@@ -1,44 +1,24 @@
 {
   "TanStack Router Link": {
-    "prefix": [
-      "Link",
-      "rl"
-    ],
-    "body": [
-      "<Link to=\"${1:/posts}\">${2:Posts}</Link>",
-      "$0"
-    ],
+    "prefix": ["Link", "rl"],
+    "body": ["<Link to=\"${1:/posts}\">${2:Posts}</Link>", "$0"],
     "description": "Link to a route; the to prop only accepts paths that exist in the route tree. Requires Link from @tanstack/react-router.\n\n跳转到某个路由，to 只接受路由树中存在的路径；需要 @tanstack/react-router 的 Link。",
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router Link with params": {
-    "prefix": [
-      "LinkParams",
-      "rlp"
-    ],
-    "body": [
-      "<Link to=\"${1:/posts}/\\$${2:postId}\" params={{ ${2}: ${3:post.id} }}>",
-      "  $0",
-      "</Link>"
-    ],
+    "prefix": ["LinkParams", "rlp"],
+    "body": ["<Link to=\"${1:/posts}/\\$${2:postId}\" params={{ ${2}: ${3:post.id} }}>", "  $0", "</Link>"],
     "description": "Link to a route with a dynamic segment; every segment of the path must appear in params. Requires Link from @tanstack/react-router.\n\n跳转到带动态段的路由，路径中的每个动态段都必须出现在 params 中；需要 @tanstack/react-router 的 Link。",
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router Link with search": {
     "prefix": "LinkSearch",
-    "body": [
-      "<Link to=\"${1:/shop/products}\" search={{ ${2:page}: ${3:1} }}>",
-      "  $0",
-      "</Link>"
-    ],
+    "body": ["<Link to=\"${1:/shop/products}\" search={{ ${2:page}: ${3:1} }}>", "  $0", "</Link>"],
     "description": "Link with search params; the object is validated against the target route's validateSearch. Requires Link from @tanstack/react-router.\n\n带 search 参数跳转，对象会按目标路由的 validateSearch 校验；需要 @tanstack/react-router 的 Link。",
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router active Link": {
-    "prefix": [
-      "LinkActive",
-      "rla"
-    ],
+    "prefix": ["LinkActive", "rla"],
     "body": [
       "<Link",
       "  to=\"${1:/posts}\"",
@@ -53,11 +33,7 @@
   },
   "TanStack Router Link preload": {
     "prefix": "LinkPreload",
-    "body": [
-      "<Link to=\"${1:/posts}\" preload=\"${2:intent}\">",
-      "  $0",
-      "</Link>"
-    ],
+    "body": ["<Link to=\"${1:/posts}\" preload=\"${2:intent}\">", "  $0", "</Link>"],
     "description": "Override the router's preloading for one link; intent preloads on hover or focus, viewport when the link is scrolled into view, render immediately, false never.\n\n为单个链接覆盖 router 的预加载策略：intent 悬停或聚焦时预载，viewport 进入视口时预载，render 立即预载，false 不预载。",
     "scope": "javascriptreact,typescriptreact"
   },

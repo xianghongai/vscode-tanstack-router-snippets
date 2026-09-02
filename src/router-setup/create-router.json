@@ -1,9 +1,6 @@
 {
   "TanStack Router createRouter": {
-    "prefix": [
-      "createRouter",
-      "rcr"
-    ],
+    "prefix": ["createRouter", "rcr"],
     "body": [
       "export const ${1:router} = createRouter({",
       "  routeTree,",
@@ -17,10 +14,7 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router type registration": {
-    "prefix": [
-      "routerRegister",
-      "rrr"
-    ],
+    "prefix": ["routerRegister", "rrr"],
     "body": [
       "declare module '@tanstack/react-router' {",
       "  interface Register {",
@@ -33,28 +27,14 @@
     "scope": "typescript,typescriptreact"
   },
   "TanStack Router RouterProvider": {
-    "prefix": [
-      "RouterProvider",
-      "rp"
-    ],
-    "body": [
-      "export function ${1:App}() {",
-      "  return <RouterProvider router={${2:router}} />;",
-      "}",
-      "$0"
-    ],
+    "prefix": ["RouterProvider", "rp"],
+    "body": ["export function ${1:App}() {", "  return <RouterProvider router={${2:router}} />;", "}", "$0"],
     "description": "Render the router at the top of the application. Requires RouterProvider from @tanstack/react-router.\n\n在应用顶层渲染 router；需要 @tanstack/react-router 的 RouterProvider。",
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router devtools": {
-    "prefix": [
-      "TanStackRouterDevtools",
-      "rtsrd"
-    ],
-    "body": [
-      "<TanStackRouterDevtools position=\"${1:bottom-right}\" />",
-      "$0"
-    ],
+    "prefix": ["TanStackRouterDevtools", "rtsrd"],
+    "body": ["<TanStackRouterDevtools position=\"${1:bottom-right}\" />", "$0"],
     "description": "Mount the router devtools inside the root route component, next to its Outlet. Requires TanStackRouterDevtools from @tanstack/react-router-devtools.\n\n在根路由组件内、Outlet 旁挂载路由开发者工具；需要 @tanstack/react-router-devtools 的 TanStackRouterDevtools。",
     "scope": "javascriptreact,typescriptreact"
   },

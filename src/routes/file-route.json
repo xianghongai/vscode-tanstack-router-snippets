@@ -1,9 +1,6 @@
 {
   "TanStack Router file route": {
-    "prefix": [
-      "createFileRoute",
-      "rcfr"
-    ],
+    "prefix": ["createFileRoute", "rcfr"],
     "body": [
       "export const Route = createFileRoute('${1:/posts}')({",
       "  component: ${2:PostsPage},",
@@ -21,10 +18,7 @@
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router file route with dynamic segment": {
-    "prefix": [
-      "fileRouteParam",
-      "rfrp"
-    ],
+    "prefix": ["fileRouteParam", "rfrp"],
     "body": [
       "export const Route = createFileRoute('${1:/posts}/\\$${2:postId}')({",
       "  loader: ({ params }) => ${3:fetchPost}(params.${2}),",
@@ -86,10 +80,7 @@
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router layout route": {
-    "prefix": [
-      "fileRouteLayout",
-      "rfrl"
-    ],
+    "prefix": ["fileRouteLayout", "rfrl"],
     "body": [
       "export const Route = createFileRoute('${1:/dashboard}')({",
       "  component: ${2:DashboardLayout},",
@@ -127,10 +118,7 @@
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router lazy file route": {
-    "prefix": [
-      "createLazyFileRoute",
-      "rclfr"
-    ],
+    "prefix": ["createLazyFileRoute", "rclfr"],
     "body": [
       "export const Route = createLazyFileRoute('${1:/posts}')({",
       "  component: ${2:PostsPage},",
@@ -148,10 +136,7 @@
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router route module (TypeScript)": {
-    "prefix": [
-      "routeModule",
-      "rm"
-    ],
+    "prefix": ["routeModule", "rm"],
     "isFileTemplate": true,
     "body": [
       "import { createFileRoute } from '@tanstack/react-router';",

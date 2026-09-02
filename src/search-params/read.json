@@ -1,34 +1,19 @@
 {
   "TanStack Router useSearch from route": {
-    "prefix": [
-      "useSearch",
-      "rus"
-    ],
-    "body": [
-      "const { ${1:page} } = Route.useSearch();",
-      "$0"
-    ],
+    "prefix": ["useSearch", "rus"],
+    "body": ["const { ${1:page} } = Route.useSearch();", "$0"],
     "description": "Read this route's validated search params inside its own component. Requires the Route exported by the route module.\n\n在路由自身的组件中读取已校验的 search 参数；需要该路由模块导出的 Route。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useSearch by route id": {
-    "prefix": [
-      "useSearch",
-      "rus"
-    ],
-    "body": [
-      "const { ${1:page} } = useSearch({ from: '${2:/shop/products}' });",
-      "$0"
-    ],
+    "prefix": ["useSearch", "rus"],
+    "body": ["const { ${1:page} } = useSearch({ from: '${2:/shop/products}' });", "$0"],
     "description": "Read a route's search params from a component that lives outside that route module. Requires useSearch from @tanstack/react-router.\n\n在路由模块之外的组件中读取某个路由的 search 参数；需要 @tanstack/react-router 的 useSearch。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useSearch with select": {
     "prefix": "useSearchSelect",
-    "body": [
-      "const ${1:page} = Route.useSearch({ select: (search) => search.${1} });",
-      "$0"
-    ],
+    "body": ["const ${1:page} = Route.useSearch({ select: (search) => search.${1} });", "$0"],
     "description": "Subscribe to one search field so the component re-renders only when that field changes. Requires the Route exported by the route module.\n\n只订阅一个 search 字段，组件仅在该字段变化时重渲染；需要该路由模块导出的 Route。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },

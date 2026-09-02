@@ -1,9 +1,6 @@
 {
   "TanStack Router form route with server function (TypeScript)": {
-    "prefix": [
-      "routeFormSubmit",
-      "rfs"
-    ],
+    "prefix": ["routeFormSubmit", "rfs"],
     "isFileTemplate": true,
     "body": [
       "import { createFileRoute, redirect, useRouter } from '@tanstack/react-router';",

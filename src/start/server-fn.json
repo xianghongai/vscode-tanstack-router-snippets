@@ -1,22 +1,12 @@
 {
   "TanStack Start server function": {
-    "prefix": [
-      "createServerFn",
-      "rcsf"
-    ],
-    "body": [
-      "export const ${1:fetchPosts} = createServerFn().handler(async () => {",
-      "  $0",
-      "});"
-    ],
+    "prefix": ["createServerFn", "rcsf"],
+    "body": ["export const ${1:fetchPosts} = createServerFn().handler(async () => {", "  $0", "});"],
     "description": "Define a function that runs only on the server and is callable from the client as an RPC. Requires createServerFn from @tanstack/react-start.\n\n定义只在服务端执行、客户端可作为 RPC 调用的函数；需要 @tanstack/react-start 的 createServerFn。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Start server function with validator": {
-    "prefix": [
-      "serverFnValidator",
-      "rsfv"
-    ],
+    "prefix": ["serverFnValidator", "rsfv"],
     "body": [
       "export const ${1:updateUser} = createServerFn({ method: 'POST' })",
       "  .validator(${2:userSchema})",
@@ -29,10 +19,7 @@
   },
   "TanStack Start server-only function": {
     "prefix": "createServerOnlyFn",
-    "body": [
-      "const ${1:getDatabaseUrl} = createServerOnlyFn(() => ${2:process.env.DATABASE_URL});",
-      "$0"
-    ],
+    "body": ["const ${1:getDatabaseUrl} = createServerOnlyFn(() => ${2:process.env.DATABASE_URL});", "$0"],
     "description": "Wrap a helper that must never reach the client bundle; calling it from the browser throws. Unlike a server function it is not an RPC. Requires createServerOnlyFn from @tanstack/react-start.\n\n包裹绝不能进入客户端产物的工具函数，在浏览器中调用会抛错；它不是 RPC，与 server function 不同；需要 @tanstack/react-start 的 createServerOnlyFn。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
@@ -48,14 +35,8 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Start useServerFn": {
-    "prefix": [
-      "useServerFn",
-      "rusf"
-    ],
-    "body": [
-      "const ${1:updateUser} = useServerFn(${2:updateUserFn});",
-      "$0"
-    ],
+    "prefix": ["useServerFn", "rusf"],
+    "body": ["const ${1:updateUser} = useServerFn(${2:updateUserFn});", "$0"],
     "description": "Call a server function from a component so redirects and not-found responses it throws are handled by the router. Requires useServerFn from @tanstack/react-start.\n\n在组件中调用 server function，使其抛出的 redirect 与 not-found 由 router 接管；需要 @tanstack/react-start 的 useServerFn。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },

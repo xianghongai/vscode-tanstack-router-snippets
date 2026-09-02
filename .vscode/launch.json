@@ -1,13 +1,16 @@
+// 先构建片段，再打开一个装好本扩展的新窗口。
+// 绿色构建不等于编辑器验收：插入效果、Tab 顺序和最终光标位置要在这个窗口里手动确认。
+// https://go.microsoft.com/fwlink/?linkid=830387
 {
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Preview Snippets",
+      "name": "Run Extension",
       "type": "extensionHost",
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
-      "preLaunchTask": "Build snippets"
+      "preLaunchTask": "build"
     }
   ]
 }

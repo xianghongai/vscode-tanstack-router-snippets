@@ -1,13 +1,7 @@
 {
   "TanStack Router loader ensureQueryData": {
-    "prefix": [
-      "ensureQueryData",
-      "reqd"
-    ],
-    "body": [
-      "loader: ({ context }) => context.queryClient.ensureQueryData(${1:postsQueryOptions}),",
-      "$0"
-    ],
+    "prefix": ["ensureQueryData", "reqd"],
+    "body": ["loader: ({ context }) => context.queryClient.ensureQueryData(${1:postsQueryOptions}),", "$0"],
     "description": "Fill the query cache before the route renders, so the component's query resolves synchronously. Requires a queryClient on the router context and a queryOptions factory.\n\n在路由渲染前填充查询缓存，使组件中的查询同步命中；需要 router context 上的 queryClient，以及一个 queryOptions 工厂。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
@@ -24,10 +18,7 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router route with suspense query": {
-    "prefix": [
-      "queryRoute",
-      "rqr"
-    ],
+    "prefix": ["queryRoute", "rqr"],
     "body": [
       "export const Route = createFileRoute('${1:/posts}')({",
       "  loader: ({ context }) => context.queryClient.ensureQueryData(${2:postsQueryOptions}),",

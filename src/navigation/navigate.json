@@ -1,9 +1,6 @@
 {
   "TanStack Router useNavigate": {
-    "prefix": [
-      "useNavigate",
-      "run"
-    ],
+    "prefix": ["useNavigate", "run"],
     "body": [
       "const navigate = useNavigate();",
       "",
@@ -32,37 +29,19 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router Navigate": {
-    "prefix": [
-      "Navigate",
-      "rn"
-    ],
-    "body": [
-      "<Navigate to=\"${1:/login}\" replace />",
-      "$0"
-    ],
+    "prefix": ["Navigate", "rn"],
+    "body": ["<Navigate to=\"${1:/login}\" replace />", "$0"],
     "description": "Navigate on render. Prefer a redirect thrown from beforeLoad — it runs before the component mounts. Requires Navigate from @tanstack/react-router.\n\n渲染时导航；更推荐在 beforeLoad 中抛出 redirect，它在组件挂载前就会执行；需要 @tanstack/react-router 的 Navigate。",
     "scope": "javascriptreact,typescriptreact"
   },
   "TanStack Router redirect": {
-    "prefix": [
-      "redirect",
-      "rr"
-    ],
-    "body": [
-      "throw redirect({",
-      "  to: '${1:/login}',",
-      "  search: { redirect: ${2:location.href} },",
-      "});",
-      "$0"
-    ],
+    "prefix": ["redirect", "rr"],
+    "body": ["throw redirect({", "  to: '${1:/login}',", "  search: { redirect: ${2:location.href} },", "});", "$0"],
     "description": "Redirect from beforeLoad or a loader by throwing. Carrying the current href in search lets the target send the visitor back. Requires redirect from @tanstack/react-router.\n\n在 beforeLoad 或 loader 中通过抛出实现重定向；把当前 href 带在 search 里，目标页便可将访问者送回；需要 @tanstack/react-router 的 redirect。",
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useBlocker": {
-    "prefix": [
-      "useBlocker",
-      "rub"
-    ],
+    "prefix": ["useBlocker", "rub"],
     "body": [
       "const { status, proceed, reset } = useBlocker({",
       "  shouldBlockFn: () => ${1:isDirty},",
@@ -74,10 +53,7 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact"
   },
   "TanStack Router useRouterState pending": {
-    "prefix": [
-      "useRouterState",
-      "rurs"
-    ],
+    "prefix": ["useRouterState", "rurs"],
     "body": [
       "const ${1:isNavigating} = useRouterState({",
       "  select: (state) => state.status === 'pending',",
