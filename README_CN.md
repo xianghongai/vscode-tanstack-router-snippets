@@ -26,15 +26,15 @@ VS Code 中的 TanStack Router 日常代码片段：文件式路由、导航、s
 
 前缀遵循三种模式：
 
-1. **API 名本身就是前缀** —— `createFileRoute`、`useLoaderData`、`Link`。路由 API 的名字**就是**最终要写下的代码，中间没有翻译环节，无需先记一套映射。
-2. **高频 API 另配短码** —— `r` + API 首字母（`rl` = `Link`、`ruld` = `useLoaderData`）；名字本身以 route 或 router 开头的不再补这个 `r`（`rc` = `routeContext`）。两种形式挂在同一条片段上，短码是用熟之后的提速手段，而不是上手门槛。
-3. **同族共用词干，变体在其后扩展** —— `Link` / `LinkParams` / `LinkSearch`，以及 `fileRoute…`、`codeRoute…`、`start…`。打出词干就能在补全列表里摊开整族备选，不必回忆该用哪个后缀。
+1. **API 名本身就是前缀**：`createFileRoute`、`useLoaderData`、`Link`。路由 API 的名字**就是**最终要写下的代码，中间没有翻译环节，无需先记一套映射。
+2. **高频 API 另配短码**：`r` + API 首字母（`rl` = `Link`、`ruld` = `useLoaderData`）；名字本身以 route 或 router 开头的不再补这个 `r`（`rc` = `routeContext`）。两种形式挂在同一条片段上，短码是用熟之后的提速手段，而不是上手门槛。
+3. **同族共用词干，变体在其后扩展**：`Link` / `LinkParams` / `LinkSearch`，以及 `fileRoute…`、`codeRoute…`、`start…`。打出词干就能在补全列表里摊开整族备选，不必回忆该用哪个后缀。
 
 ### router 装配
 
 | 前缀                     | 缩写    | 插入内容                            |
 | ------------------------ | ------- | ----------------------------------- |
-| `routerEntry`            | `re`    | 应用入口——创建、注册并挂载 router   |
+| `routerEntry`            | `re`    | 应用入口：创建、注册并挂载 router   |
 | `createRouter`           | `rcr`   | 由生成的路由树创建 router 实例      |
 | `routerRegister`         | `rrr`   | `declare module` 类型注册           |
 | `RouterProvider`         | `rp`    | 渲染 router 的组件                  |
@@ -47,7 +47,7 @@ VS Code 中的 TanStack Router 日常代码片段：文件式路由、导航、s
 | 前缀                     | 缩写    | 插入内容                                               |
 | ------------------------ | ------- | ------------------------------------------------------ |
 | `createFileRoute`        | `rcfr`  | 文件式路由及其组件                                     |
-| `routeModule`            | `rm`    | 完整路由模块——loader、组件、错误与等待状态             |
+| `routeModule`            | `rm`    | 完整路由模块：loader、组件、错误与等待状态             |
 | `fileRouteParam`         | `rfrp`  | 动态段，并按其加载与读取                               |
 | `fileRouteOptionalParam` |         | 可缺省的前导段                                         |
 | `fileRouteSplat`         |         | splat 路由，读取 `_splat`                              |
@@ -87,7 +87,7 @@ VS Code 中的 TanStack Router 日常代码片段：文件式路由、导航、s
 
 | 前缀               | 缩写  | 插入内容                                                |
 | ------------------ | ----- | ------------------------------------------------------- |
-| `validateSearch`   | `rvs` | search schema——Zod 版与普通函数版                       |
+| `validateSearch`   | `rvs` | search schema：Zod 版与普通函数版                       |
 | `searchMiddleware` | `rsm` | `retainSearchParams` 与 `stripSearchParams`             |
 | `useSearch`        | `rus` | 路由内 `Route.useSearch()` 与外部 `useSearch({ from })` |
 | `useSearchSelect`  |       | 只订阅一个 search 字段                                  |

@@ -6,7 +6,7 @@
  * 故有此合并步骤。每条片段投放到哪些语言由它自己的 `scope` 决定，
  * 与它落在哪个文件无关。
  *
- * 类型仅作文档用途——Node 会剥离类型，没有任何环节做类型检查。
+ * 类型仅作文档用途。Node 会剥离类型，没有任何环节做类型检查。
  */
 import 'dotenv/config';
 import { globSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -24,7 +24,7 @@ type Snippet = {
 };
 
 /* ------------------------------------------------------------------ *
- * 输入与输出——两者都不含仓库名，可原样移植到其他片段仓库             *
+ * 输入与输出：两者都不含仓库名，可原样移植到其他片段仓库             *
  * ------------------------------------------------------------------ */
 
 const sources = 'src/**/*.json';
@@ -119,7 +119,7 @@ for (const [file, count] of contributions) {
 // 不读取这些文件：既然已排除，一个内容损坏的来源也不该让构建失败。
 if (exclude.length) {
   const included = new Set(files);
-  console.log(pc.yellow(`excluded by SNIPPETS_EXCLUDE (${exclude.join(', ')}):`));
+  console.log(pc.yellow(`excluded by SNIPPETS_EXCLUDE (${exclude.join(', ')})：`));
   for (const file of globSync(sources).sort()) {
     if (!included.has(file)) {
       console.log(pc.dim(`  ${file}`));
