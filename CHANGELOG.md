@@ -1,5 +1,10 @@
 # Changelog / 更新日志
 
+## 1.1.0 (2026-09-03)
+
+- Unify packaging and publishing scripts to `vsce:package` and `vsce:publish`
+- Update GitHub Actions CI workflow to use `pnpm run vsce:publish`
+
 ## 1.0.2
 
 - No snippet changes.

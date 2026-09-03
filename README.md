@@ -20,7 +20,7 @@ Everyday TanStack Router patterns for VS Code: file routes, navigation, search p
   </a>
 </p>
 
-[中文文档](./README_CN.md)
+[中文文档](./README.zh-CN.md)
 
 ## Prefixes
 
